@@ -14,18 +14,17 @@ const HOST = process.env.HOST;
 (async function init() {
   try {
     // await connect(DB_URL);
-
     const app = express();
     const server = http.Server(app);
-    sockets.init();
+
     app.use(cors());
     app.use(express.json());
 
+    sockets.init();
     // app.use("/api/users", userRouter);
 
     app.use(notFound);
     app.use(handleError);
-
     server.listen(
       PORT,
       HOST,
