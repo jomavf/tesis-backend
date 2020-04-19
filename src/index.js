@@ -17,7 +17,7 @@ const HOST = process.env.HOST;
     const app = express();
     const server = http.Server(app);
 
-    app.use(cors());
+    // app.use(cors());
     app.use(express.json());
 
     sockets.init();
