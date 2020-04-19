@@ -32,11 +32,7 @@ const HOST = process.env.HOST;
 
     app.use(notFound);
     app.use(handleError);
-    server.listen(
-      PORT,
-      HOST,
-      console.log(`Listening on http://${HOST}:${PORT} ...`)
-    );
+    server.listen(PORT, HOST, console.log(`Listening on ${PORT} ...`));
   } catch (err) {
     console.log(err);
   }
