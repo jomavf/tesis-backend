@@ -20,6 +20,13 @@ const HOST = process.env.HOST;
     // app.use(cors());
     app.use(express.json());
 
+    app.use("/", (req, res) => {
+      res.status(200).json({
+        ok: true,
+        message: "Hola mundo ✌🏼",
+      });
+    });
+
     sockets.init();
     // app.use("/api/users", userRouter);
 
