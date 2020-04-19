@@ -15,9 +15,9 @@ const HOST = process.env.HOST;
   try {
     // await connect(DB_URL);
     const app = express();
+    app.use(cors());
     const server = http.Server(app);
 
-    // app.use(cors());
     app.use(express.json());
 
     app.use("/", (req, res) => {
