@@ -15,9 +15,10 @@ const HOST = process.env.HOST;
   try {
     // await connect(DB_URL);
     const app = express();
-    app.use(cors());
     const server = http.Server(app);
+    sockets.init(server);
 
+    app.use(cors());
     app.use(express.json());
 
     app.use("/", (req, res) => {
@@ -27,11 +28,11 @@ const HOST = process.env.HOST;
       });
     });
 
-    sockets.init();
     // app.use("/api/users", userRouter);
 
     app.use(notFound);
     app.use(handleError);
+
     server.listen(PORT, HOST, console.log(`Listening on ${PORT} ...`));
   } catch (err) {
     console.log(err);
