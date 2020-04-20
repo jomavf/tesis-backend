@@ -15,13 +15,11 @@ function init(server) {
       if (!roomsArray.some((element) => element === room)) {
         roomsArray.push(room);
       }
-      console.log(roomsArray);
-      socket.emit("rooms", roomsArray);
     });
 
     socket.on("new-message", function (data) {
       console.log(data);
-      socket.to(data.room).emit("messages", data);
+      // socket.to(data.room).emit("messages", data);
     });
   });
 }
