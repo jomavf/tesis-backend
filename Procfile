@@ -1,4 +1,4 @@
-npm run rollback
-npm run migrate
-npm run seed
-npm run start
+web: npm run rollback
+web: npm run migrate
+web: npm run seed
+web: npm run start
