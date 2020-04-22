@@ -5,7 +5,8 @@ const http = require("http");
 
 // const { connect } = require("./db.js");
 // const { userRouter } = require("./controllers");
-const { notFound, handleError } = require("./middlewares");
+const { notFound, handleError } = require("./api/middlewares");
+const apiRouter = require("./api/routes");
 const sockets = require("./sockets");
 const PORT = process.env.PORT;
 const HOST = process.env.HOST;
@@ -21,14 +22,7 @@ const HOST = process.env.HOST;
     app.use(cors());
     app.use(express.json());
 
-    app.use("/", (req, res) => {
-      res.status(200).json({
-        ok: true,
-        message: "Hola mundo ✌🏼",
-      });
-    });
-
-    // app.use("/api/users", userRouter);
+    app.use("/api/v1", apiRouter);
 
     app.use(notFound);
     app.use(handleError);
