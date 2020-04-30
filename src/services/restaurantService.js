@@ -5,7 +5,10 @@ const tableNames = require("./../constants/tableNames");
  */
 
 function create() {}
-async function getAll() {
+async function getAll({ name }) {
+  if (name) {
+    return await Knex(tableNames.restaurant).select().where({ name });
+  }
   return await Knex(tableNames.restaurant).select();
 }
 function updateById() {}

@@ -6,7 +6,8 @@
   "scripts": {
     "migrate": "knex migrate:latest",
     "rollback": "knex migrate:rollback",
-    "seed": "knex seed:run",
+    "seed": "knex migrate:rollback && knex migrate:latest && knex seed:run",
+    "setdb": "knex seed:run",
     "start": "node src/index.js",
     "dev": "nodemon src/index.js"
   },

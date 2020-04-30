@@ -4,7 +4,7 @@ function create(req, res, next) {}
 
 async function getAll(req, res, next) {
   try {
-    const restaurants = await RestaurantService.getAll();
+    const restaurants = await RestaurantService.getAll(req.query);
     res.status(200).json({
       ok: true,
       data: restaurants,

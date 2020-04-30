@@ -1,4 +1,6 @@
 module.exports = {
-  user: "user",
+  reservation_type: "reservation_type",
   restaurant: "restaurant",
+  user: "user",
+  reservation: "reservation",
 };
