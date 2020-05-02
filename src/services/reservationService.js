@@ -1,13 +1,14 @@
 const Knex = require("../db/knex");
 const tableNames = require("../constants/tableNames");
-const tableName = tableNames.reservation;
+const reservationTable = tableNames.reservation;
+const restaurantTable = tableNames.restaurant;
 
 /**
  * @param {Knex} knex
  */
 
 async function create({ restaurantId, reservationTypeId, startTime, endTime }) {
-  return await Knex(tableName)
+  return await Knex(reservationTable)
     .insert({
       restaurant_id: restaurantId,
       reservation_type_id: reservationTypeId,
@@ -17,7 +18,14 @@ async function create({ restaurantId, reservationTypeId, startTime, endTime }) {
     .returning("*");
 }
 async function getAll() {
-  return await Knex(tableName).select();
+  return await Knex(reservationTable)
+    .join(
+      restaurantTable,
+      `${restaurantTable}.id`,
+      "=",
+      `${reservationTable}.restaurant_id`
+    )
+    .select();
 }
 function updateById() {}
 function deleteById() {}
