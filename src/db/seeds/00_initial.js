@@ -18,22 +18,37 @@ exports.seed = async (knex) => {
         "Excelente cocina gourmet en un espacio distinguido que te ofrece una experiencia absolutamente perfecta.El Restaurante La Locanda del Swissôtel en San Isidro te invita a disfrutar de los momentos que mereces en espacios finamente decorados con una atención de primer nivel.",
     },
   ]);
-  await knex.table(tableNames.reservation_type).insert([
+  await knex(tableNames.spa).del();
+  await knex.table(tableNames.spa).insert([
     {
-      name: "RESTAURANT",
-      description: "Restaurante",
+      name: "Spa 1",
+      description: "Super Spa",
     },
     {
-      name: "SPA",
-      description: "Spa",
+      name: "Spa 2",
+      description: "Super Spa 2",
+    },
+  ]);
+  await knex(tableNames.gym).del();
+  await knex.table(tableNames.gym).insert([
+    {
+      name: "Megaforce",
+      description: "Super Gym",
     },
     {
-      name: "GYM",
-      description: "Gimnasio",
+      name: "Fullbody Training",
+      description: "Super Gym 2",
+    },
+  ]);
+  await knex(tableNames.local).del();
+  await knex.table(tableNames.local).insert([
+    {
+      name: "Local 1",
+      description: "Super Local",
     },
     {
-      name: "LOCAL_EVENT",
-      description: "Local de Evento",
+      name: "Local 2",
+      description: "Super Local 2",
     },
   ]);
 };

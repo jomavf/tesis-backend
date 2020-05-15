@@ -1,10 +1,10 @@
-const ReservationService = require("../services/reservationService");
+const ReservationRestaurantService = require("../services/reservationRestaurantService");
 
 async function create(req, res, next) {
   try {
     const data = req.body;
-    const newReservation = await ReservationService.create(data);
-    res.json({
+    const newReservation = await ReservationRestaurantService.create(data);
+    return res.json({
       success: true,
       data: newReservation,
     });
@@ -15,10 +15,10 @@ async function create(req, res, next) {
 
 async function getAll(req, res, next) {
   try {
-    const restaurants = await ReservationService.getAll();
+    const reservations = await ReservationRestaurantService.getAll();
     res.status(200).json({
       ok: true,
-      data: restaurants,
+      data: reservations,
     });
   } catch (error) {
     next(error);

@@ -1,6 +1,6 @@
 const Knex = require("../db/knex");
 const tableNames = require("../constants/tableNames");
-const restaurantTableName = tableNames.restaurant;
+const localTableName = tableNames.local;
 /**
  * @param {Knex} knex
  */
@@ -8,11 +8,11 @@ const restaurantTableName = tableNames.restaurant;
 function create() {}
 async function getAll({ name }) {
   if (name) {
-    return await Knex(restaurantTableName)
+    return await Knex(localTableName)
       .select()
-      .where(`${restaurantTableName}.name`, "ilike", `%${name}%`);
+      .where(`${localTableName}.name`, "ilike", `%${name}%`);
   }
-  return await Knex(restaurantTableName).select();
+  return await Knex(localTableName).select();
 }
 function updateById() {}
 function deleteById() {}
