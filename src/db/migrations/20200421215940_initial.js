@@ -21,24 +21,28 @@ exports.up = async (Knex) => {
       table.increments().notNullable();
       table.string("name", 100).notNullable();
       table.string("description", 300).notNullable();
+      table.string("imgUrl", 300).notNullable();
       addDefaultColumns(table);
     }),
     await Knex.schema.createTable(tableNames.spa, (table) => {
       table.increments().notNullable();
       table.string("name", 100).notNullable();
       table.string("description", 300).notNullable();
+      table.string("imgUrl", 300).notNullable();
       addDefaultColumns(table);
     }),
     await Knex.schema.createTable(tableNames.gym, (table) => {
       table.increments().notNullable();
       table.string("name", 100).notNullable();
       table.string("description", 300).notNullable();
+      table.string("imgUrl", 300).notNullable();
       addDefaultColumns(table);
     }),
     await Knex.schema.createTable(tableNames.local, (table) => {
       table.increments().notNullable();
       table.string("name", 100).notNullable();
       table.string("description", 300).notNullable();
+      table.string("imgUrl", 300).notNullable();
       addDefaultColumns(table);
     }),
   ]);
