@@ -21,7 +21,7 @@ async function create({
   return await Knex(reservationGymTable)
     .insert({
       user_id: userId,
-      gym_id: gymIf,
+      gym_id: gymId,
       description: description,
       start_time: startTime,
       end_time: endTime,
