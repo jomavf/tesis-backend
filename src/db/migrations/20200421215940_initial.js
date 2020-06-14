@@ -45,6 +45,13 @@ exports.up = async (Knex) => {
       table.string("imgUrl", 300).notNullable();
       addDefaultColumns(table);
     }),
+    await Knex.schema.createTable(tableNames.event, (table) => {
+      table.increments().notNullable();
+      table.string("name", 100).notNullable();
+      table.string("description", 300).notNullable();
+      table.string("imgUrl", 300).notNullable();
+      addDefaultColumns(table);
+    }),
   ]);
 
   await Knex.schema.createTable(tableNames.reservation_spa, (table) => {
@@ -54,6 +61,15 @@ exports.up = async (Knex) => {
     table.string("description", 300);
     addDefaultColumns(table);
     references(table, tableNames.spa);
+    references(table, tableNames.user);
+  });
+  await Knex.schema.createTable(tableNames.reservation_event, (table) => {
+    table.increments().notNullable();
+    table.timestamp("start_time", { precision: 6 }).notNullable();
+    table.timestamp("end_time", { precision: 6 }).notNullable();
+    table.string("description", 300);
+    addDefaultColumns(table);
+    references(table, tableNames.event);
     references(table, tableNames.user);
   });
   await Knex.schema.createTable(tableNames.reservation_local, (table) => {

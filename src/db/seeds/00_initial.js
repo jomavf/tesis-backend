@@ -59,4 +59,17 @@ exports.seed = async (knex) => {
       imgUrl: "https://via.placeholder.com/150",
     },
   ]);
+  await knex(tableNames.event).del();
+  await knex.table(tableNames.event).insert([
+    {
+      name: "Evento 1",
+      description: "Super evento",
+      imgUrl: "https://via.placeholder.com/150",
+    },
+    {
+      name: "Evento 2",
+      description: "Super Evento 2",
+      imgUrl: "https://via.placeholder.com/150",
+    },
+  ]);
 };
