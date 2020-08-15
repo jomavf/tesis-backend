@@ -1,27 +1,34 @@
-const socketIO = require("socket.io");
+// const socketIO = require("socket.io");
+const WebSocket = require("ws");
+// let roomsArray = [];
+// var port = process.env.PORT || 8080
 
-let roomsArray = [];
+function init(expressServer) {
+  const server = new WebSocket.Server({
+    server: expressServer,
+  });
 
-function init(server) {
-  const io = socketIO(server);
-  console.log("Server sockets is listening for connections!!");
-
-  io.on("connection", (socket) => {
-    console.log("client connected!!");
-
-    socket.on("join-room", (room) => {
-      console.log("Client joined on " + room);
-      socket.join(room);
-      if (!roomsArray.some((element) => element === room)) {
-        roomsArray.push(room);
-      }
+  function broadcast(data) {
+    server.clients.forEach((ws) => {
+      ws.send(data);
     });
+  }
 
-    socket.on("new-message", function (data) {
+  server.on("connection", (ws) => {
+    console.log("client connected.");
+    ws.on("message", (data) => {
       console.log(data);
-      // socket.to(data.room).emit("messages", data);
+      broadcast(data);
     });
   });
+
+  setInterval(() => {
+    server.clients.forEach((client) => {
+      client.send(new Date().toTimeString());
+    });
+  }, 1000);
+
+  console.log("Server sockets is listening for connections!!");
 }
 
 module.exports = {

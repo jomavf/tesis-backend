@@ -6,6 +6,7 @@ const gymTableName = tableNames.gym;
  */
 
 function create() {}
+
 async function getAll({ name = null }) {
   if (name) {
     return await Knex(gymTableName)

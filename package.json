@@ -9,7 +9,8 @@
     "seed": "knex seed:run",
     "setdb": "knex migrate:rollback && knex migrate:latest && knex seed:run",
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js",
+    "lint": "eslint src"
   },
   "repository": {
     "type": "git",
@@ -36,9 +37,11 @@
     "express": "^4.17.1",
     "knex": "^0.21.0",
     "pg": "^8.0.2",
-    "socket.io": "^2.3.0"
+    "socket.io": "^2.3.0",
+    "ws": "^7.3.1"
   },
   "devDependencies": {
+    "eslint": "^7.2.0",
     "nodemon": "^2.0.3"
   }
 }
