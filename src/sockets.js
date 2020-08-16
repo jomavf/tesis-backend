@@ -1,7 +1,4 @@
-// const socketIO = require("socket.io");
 const WebSocket = require("ws");
-// let roomsArray = [];
-// var port = process.env.PORT || 8080
 
 function init(expressServer) {
   const server = new WebSocket.Server({

@@ -5,7 +5,38 @@ const gymTableName = tableNames.gym;
  * @param {Knex} knex
  */
 
-function create() {}
+async function create(data) {
+  return await Knex(gymTableName)
+    .insert({
+      ...data,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    })
+    .returning("*");
+}
+
+async function upsert(data) {
+  if (data.id == null) {
+    // create
+    return await Knex(gymTableName)
+      .insert({
+        ...data,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      })
+      .returning("*");
+  } else {
+    //update
+    return await Knex(gymTableName)
+      .where("id", "=", data.id)
+      .update({
+        name: data.name,
+        description: data.description,
+        updated_at: new Date().toISOString(),
+      })
+      .returning("*");
+  }
+}
 
 async function getAll({ name = null }) {
   if (name) {
@@ -16,10 +47,14 @@ async function getAll({ name = null }) {
   return await Knex(gymTableName).select();
 }
 function updateById() {}
-function deleteById() {}
+
+async function deleteById(id) {
+  return await Knex(gymTableName).where("id", "=", id).del();
+}
 
 module.exports = {
   create,
+  upsert,
   getAll,
   updateById,
   deleteById,
