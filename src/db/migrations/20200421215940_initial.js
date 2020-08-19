@@ -1,16 +1,17 @@
-const Knex = require("knex");
 const tableNames = require("./../../constants/tableNames");
-const {
-  addDefaultColumns,
-  createNameTable,
-  references,
-} = require("./../../lib/tableUtils");
+const { addDefaultColumns, references } = require("./../../lib/tableUtils");
 
 /**
  * @param {Knex} knex
  */
 exports.up = async (Knex) => {
   await Promise.all([
+    await Knex.schema.createTable(tableNames.administrator, (table) => {
+      table.increments().notNullable();
+      table.string("email", 100).notNullable();
+      table.string("password", 100).notNullable();
+      addDefaultColumns(table);
+    }),
     await Knex.schema.createTable(tableNames.user, (table) => {
       table.increments().notNullable();
       table.string("username", 100).notNullable();
@@ -113,6 +114,7 @@ exports.down = async (Knex) => {
       tableNames.local,
       tableNames.spa,
       tableNames.user,
+      tableNames.administrator,
     ].map((tableName) => Knex.schema.dropTableIfExists(tableName))
   );
 };

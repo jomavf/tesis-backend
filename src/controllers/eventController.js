@@ -6,7 +6,7 @@ async function getAll(req, res, next) {
   try {
     const events = await EventService.getAll(req.query);
     res.status(200).json({
-      ok: true,
+      success: true,
       data: events,
     });
   } catch (error) {

@@ -6,7 +6,7 @@ async function getAll(req, res, next) {
   try {
     const users = await UserService.getAll(req.query);
     res.status(200).json({
-      ok: true,
+      success: true,
       data: users,
     });
   } catch (error) {

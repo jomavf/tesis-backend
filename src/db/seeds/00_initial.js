@@ -72,4 +72,11 @@ exports.seed = async (knex) => {
       imgUrl: "https://via.placeholder.com/150",
     },
   ]);
+  await knex(tableNames.administrator).del();
+  await knex.table(tableNames.administrator).insert([
+    {
+      email: "jose@gmail.com",
+      password: "F",
+    },
+  ]);
 };

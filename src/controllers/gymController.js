@@ -6,7 +6,7 @@ async function createOrUpdate(req, res, next) {
   try {
     const createdGym = await GymService.upsert(req.body);
     res.status(200).json({
-      ok: true,
+      success: true,
       data: createdGym,
     });
   } catch (error) {
@@ -18,7 +18,7 @@ async function deleteById(req, res, next) {
   try {
     await GymService.deleteById(req.params.id);
     res.status(200).json({
-      ok: true,
+      success: true,
       data: null,
     });
   } catch (error) {
@@ -30,7 +30,7 @@ async function getAll(req, res, next) {
   try {
     const gyms = await GymService.getAll(req.query);
     res.status(200).json({
-      ok: true,
+      success: true,
       data: gyms,
     });
   } catch (error) {

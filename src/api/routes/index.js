@@ -11,6 +11,7 @@ const reservationLocalRouter = require("./reservationLocal");
 const reservationSpaRouter = require("./reservationSpa");
 const reservationGymRouter = require("./reservationGym");
 const userRouter = require("./user");
+const administratorRouter = require("./administrator");
 
 router.use("/restaurants", restaurantsRouter);
 router.use("/gyms", gymsRouter);
@@ -19,6 +20,7 @@ router.use("/spas", spasRouter);
 router.use("/events", eventsRouter);
 
 router.use("/user", userRouter);
+router.use("/administrator", administratorRouter);
 
 router.use("/reservation-event", reservationEventsRouter);
 router.use("/reservation-restaurant", reservationRestaurantRouter);

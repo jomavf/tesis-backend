@@ -17,7 +17,7 @@ async function getAll(req, res, next) {
   try {
     const reservations = await ReservationLocalService.getAll();
     res.status(200).json({
-      ok: true,
+      success: true,
       data: reservations,
     });
   } catch (error) {

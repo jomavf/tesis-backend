@@ -32,6 +32,7 @@ async function upsert(data) {
       .update({
         name: data.name,
         description: data.description,
+        imgUrl: data.imgUrl,
         updated_at: new Date().toISOString(),
       })
       .returning("*");

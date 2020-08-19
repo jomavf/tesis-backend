@@ -5,6 +5,7 @@ module.exports = {
   local: "local",
   event: "event",
   user: "user",
+  administrator: "administrator",
   reservation_event: "reservation_event",
   reservation_restaurant: "reservation_restaurant",
   reservation_spa: "reservation_spa",
