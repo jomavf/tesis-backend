@@ -100,6 +100,43 @@ exports.up = async (Knex) => {
     references(table, tableNames.gym);
     references(table, tableNames.user);
   });
+  await Knex.schema.createTable(tableNames.hsiaPackage, (table) => {
+    table.increments().notNullable();
+    table.string("name", 250);
+    table.string("description", 250);
+    table.integer("internet_speed");
+    table.string("unit_measure", 250);
+    table.integer("total_amount");
+    addDefaultColumns(table);
+  });
+  await Knex.schema.createTable(tableNames.guest, (table) => {
+    table.increments().notNullable();
+    table.string("first_name", 250);
+    table.string("last_name", 250);
+    table.string("document_number", 250);
+    table.string("document_type", 250);
+    table.string("email", 250);
+    table.string("address", 250);
+    table.string("number_phone", 250);
+    table.string("city", 250);
+    table.string("country", 250);
+    table.boolean("inactive");
+    addDefaultColumns(table);
+  });
+  await Knex.schema.createTable(tableNames.hsiaSubscription, (table) => {
+    table.increments().notNullable();
+    table.boolean("is_accepted");
+    table.boolean("is_active");
+    table.string("accepted_by", 250);
+    table.integer("number_days");
+    table.timestamp("application_date", { precision: 6 }).notNullable();
+    table.timestamp("acceptance_date", { precision: 6 }).notNullable();
+    table.timestamp("cancellation_date", { precision: 6 }).notNullable();
+    addDefaultColumns(table);
+    references(table, tableNames.hsiaPackage);
+    references(table, tableNames.administrator);
+    references(table, tableNames.guest);
+  });
 };
 
 exports.down = async (Knex) => {

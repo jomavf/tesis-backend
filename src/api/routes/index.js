@@ -12,6 +12,9 @@ const reservationSpaRouter = require("./reservationSpa");
 const reservationGymRouter = require("./reservationGym");
 const userRouter = require("./user");
 const administratorRouter = require("./administrator");
+const hsiaPackageRouter = require("./hsiaPackage");
+const hsiaSubscriptionRouter = require("./hsiaSubscription");
+const guestRouter = require("./guest");
 
 router.use("/restaurants", restaurantsRouter);
 router.use("/gyms", gymsRouter);
@@ -27,5 +30,8 @@ router.use("/reservation-restaurant", reservationRestaurantRouter);
 router.use("/reservation-local", reservationLocalRouter);
 router.use("/reservation-spa", reservationSpaRouter);
 router.use("/reservation-gym", reservationGymRouter);
+router.use("/hsia-package", hsiaPackageRouter);
+router.use("/hsia-subscription", hsiaSubscriptionRouter);
+router.use("/guest", guestRouter);
 
 module.exports = router;
