@@ -121,7 +121,6 @@ exports.up = async (Knex) => {
     addDefaultColumns(table);
     references(table, tableNames.guest);
   });
-
   await Knex.schema.createTable(tableNames.devices, (table) => {
     table.increments().notNullable();
     addDefaultColumns(table);
@@ -166,7 +165,6 @@ exports.up = async (Knex) => {
     references(table, tableNames.administrator);
     references(table, tableNames.guest);
   });
-
   await Knex.schema.createTable(tableNames.dish_type, (table) => {
     table.increments().notNullable();
     table.string("description", 250);
