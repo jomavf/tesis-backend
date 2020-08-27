@@ -47,7 +47,8 @@ async function getAll({ name = null }) {
   }
   return await Knex(hsiaPackageTableName).select();
 }
-function updateById() {}
+
+function updateByIdå() {}
 
 async function deleteById(id) {
   return await Knex(hsiaPackageTableName).where("id", "=", id).del();
