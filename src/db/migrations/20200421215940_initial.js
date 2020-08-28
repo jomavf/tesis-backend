@@ -111,6 +111,7 @@ exports.up = async (Knex) => {
     table.string("description", 250);
     table.decimal("price", { precision: 2 });
     table.integer("quantity");
+    table.string("img_url");
     table.boolean("has_stock");
     table.boolean("active");
     addDefaultColumns(table);

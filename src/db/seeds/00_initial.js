@@ -144,11 +144,15 @@ exports.seed = async (knex) => {
       price: 9.99,
       quantity: 40,
       has_stock: true,
+      img_url:
+        "https://enelbreak.com/buen-provecho/wp-content/uploads/2017/07/torta-chocolate-vinotinto.jpeg",
       active: true,
       product_category_id: 1,
     },
     {
       name: "Wisky Limenio",
+      img_url:
+        "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcdn.hiconsumption.com%2Fwp-content%2Fuploads%2F2017%2F02%2FBest-Blended-Scotch.jpg&f=1&nofb=1",
       description:
         "Wisky Limenio Hecho con las mejores uvas de las afueras de Lima.",
       price: 99.99,
@@ -160,6 +164,7 @@ exports.seed = async (knex) => {
     {
       name: "Inka cola",
       description: "La mejor bebida del Peru.",
+      img_url: "http://upload.wikimedia.org/wikipedia/en/9/9d/Inca_Kola.jpg",
       price: 4.99,
       quantity: 29,
       has_stock: true,
@@ -173,6 +178,8 @@ exports.seed = async (knex) => {
       price: 2.99,
       quantity: 19,
       has_stock: true,
+      img_url:
+        "http://snackmachinery.es/upload/3642/o/1-21-1-fresh-potato-chips-processing-line-11.jpg",
       active: true,
       product_category_id: 4,
     },
