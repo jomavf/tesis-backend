@@ -37,11 +37,16 @@ async function upsert(data) {
   }
 }
 
-async function getAll({ name = null }) {
+async function getAll({ name = null, category_id = null }) {
   if (name) {
     return await Knex(tableName)
       .select()
       .where(`${tableName}.name`, "ilike", `%${name}%`);
+  }
+  if (category_id) {
+    return await Knex(tableName)
+      .select()
+      .where(`${tableName}.product_category_id`, "=", `${category_id}`);
   }
   return await Knex(tableName).select();
 }
