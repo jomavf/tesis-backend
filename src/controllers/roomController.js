@@ -1,4 +1,4 @@
-const service = require("../services/gymService");
+const service = require("../services/roomService");
 
 function create(req, res, next) {}
 

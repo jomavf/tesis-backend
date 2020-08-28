@@ -1,6 +1,6 @@
 const Knex = require("../db/knex");
 const tableNames = require("../constants/tableNames");
-const tableName = tableNames.gym;
+const tableName = tableNames.in_room_services;
 /**
  * @param {Knex} knex
  */

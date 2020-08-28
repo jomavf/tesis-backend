@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+
 const restaurantsRouter = require("./restaurant");
 const gymsRouter = require("./gym");
 const localsRouter = require("./local");
@@ -10,21 +11,32 @@ const reservationRestaurantRouter = require("./reservationRestaurant");
 const reservationLocalRouter = require("./reservationLocal");
 const reservationSpaRouter = require("./reservationSpa");
 const reservationGymRouter = require("./reservationGym");
-const userRouter = require("./user");
 const administratorRouter = require("./administrator");
 const hsiaPackageRouter = require("./hsiaPackage");
 const hsiaSubscriptionRouter = require("./hsiaSubscription");
 const guestRouter = require("./guest");
+
+const productRouter = require("./product");
+const productCategoryRouter = require("./productCategory");
+const transactionRouter = require("./transaction");
+const dishRouter = require("./dish");
+const dishTypeRouter = require("./dishType");
+const localGuideRouter = require("./localGuide");
+const touristicPlaceRouter = require("./touristicPlace");
+const checkInRouter = require("./checkIn");
+const roomRouter = require("./room");
+const inRoomServiceRouter = require("./inRoomService");
+const inRoomServiceHistoryRouter = require("./inRoomServiceHistory");
+const inRoomServiceTypeRouter = require("./inRoomServiceType");
+const devicesRouter = require("./device");
+const accountRouter = require("./account");
 
 router.use("/restaurants", restaurantsRouter);
 router.use("/gyms", gymsRouter);
 router.use("/locals", localsRouter);
 router.use("/spas", spasRouter);
 router.use("/events", eventsRouter);
-
-router.use("/user", userRouter);
 router.use("/administrator", administratorRouter);
-
 router.use("/reservation-event", reservationEventsRouter);
 router.use("/reservation-restaurant", reservationRestaurantRouter);
 router.use("/reservation-local", reservationLocalRouter);
@@ -33,5 +45,20 @@ router.use("/reservation-gym", reservationGymRouter);
 router.use("/hsia-package", hsiaPackageRouter);
 router.use("/hsia-subscription", hsiaSubscriptionRouter);
 router.use("/guest", guestRouter);
+
+router.use("/product", productRouter);
+router.use("/product-category", productCategoryRouter);
+router.use("/transaction", transactionRouter);
+router.use("/dish", dishRouter);
+router.use("/dish-type", dishTypeRouter);
+router.use("/local-guide", localGuideRouter);
+router.use("/touristic-place", touristicPlaceRouter);
+router.use("/check-in", checkInRouter);
+router.use("/room", roomRouter);
+router.use("/in-room-service", inRoomServiceRouter);
+router.use("/in-room-service-history", inRoomServiceHistoryRouter);
+router.use("/in-room-service-type", inRoomServiceTypeRouter);
+router.use("/devices", devicesRouter);
+router.use("/account", accountRouter);
 
 module.exports = router;
