@@ -51,7 +51,7 @@ exports.up = async (Knex) => {
     table.string("number_phone", 250);
     table.string("city", 250);
     table.string("country", 250);
-    table.boolean("inactive");
+    table.boolean("active");
     addDefaultColumns(table);
   });
   await Knex.schema.createTable(tableNames.reservation_spa, (table) => {
@@ -219,18 +219,34 @@ exports.up = async (Knex) => {
 exports.down = async (Knex) => {
   await Promise.all(
     [
-      tableNames.reservation_gym,
-      tableNames.reservation_local,
-      tableNames.reservation_restaurant,
-      tableNames.reservation_spa,
-      tableNames.reservation_event,
-      tableNames.restaurant,
-      tableNames.gym,
-      tableNames.local,
-      tableNames.event,
-      tableNames.spa,
-      tableNames.guest,
+      tableNames.touristic_places,
+      tableNames.local_guides,
+      tableNames.in_room_service_history,
+      tableNames.in_room_services,
+      tableNames.in_room_service_types,
+      tableNames.transaction,
+      tableNames.dish,
+      tableNames.dish_type,
+      tableNames.hsia_subscription,
+      tableNames.hsia_package,
       tableNames.administrator,
+      tableNames.check_in,
+      tableNames.room,
+      tableNames.devices,
+      tableNames.account,
+      tableNames.product,
+      tableNames.product_category,
+      tableNames.reservation_gym,
+      tableNames.reservation_restaurant,
+      tableNames.reservation_local,
+      tableNames.reservation_event,
+      tableNames.reservation_spa,
+      tableNames.guest,
+      tableNames.event,
+      tableNames.local,
+      tableNames.gym,
+      tableNames.spa,
+      tableNames.restaurant,
     ].map((tableName) => Knex.schema.dropTableIfExists(tableName))
   );
 };
