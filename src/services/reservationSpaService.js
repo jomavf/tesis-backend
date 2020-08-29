@@ -1,6 +1,6 @@
 const Knex = require("../db/knex");
 const tableNames = require("../constants/tableNames");
-const reservationSpaTable = tableNames.reservation_spa;
+const reservationSpaTable = tableNames.reservationSpa;
 const spaTable = tableNames.spa;
 const userTable = tableNames.user;
 

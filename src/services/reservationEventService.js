@@ -1,6 +1,6 @@
 const Knex = require("../db/knex");
 const tableNames = require("../constants/tableNames");
-const eventReservationTableName = tableNames.reservation_event;
+const eventReservationTableName = tableNames.reservationEvent;
 /**
  * @param {Knex} knex
  */

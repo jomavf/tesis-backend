@@ -1,6 +1,6 @@
 const Knex = require("../db/knex");
 const tableNames = require("../constants/tableNames");
-const tableName = tableNames.touristic_places;
+const tableName = tableNames.touristicPlaces;
 /**
  * @param {Knex} knex
  */

@@ -1,6 +1,6 @@
 const Knex = require("../db/knex");
 const tableNames = require("../constants/tableNames");
-const reservationRestaurantTable = tableNames.reservation_restaurant;
+const reservationRestaurantTable = tableNames.reservationRestaurant;
 const restaurantTable = tableNames.restaurant;
 const userTable = tableNames.user;
 

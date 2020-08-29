@@ -1,6 +1,6 @@
 const Knex = require("../db/knex");
 const tableNames = require("../constants/tableNames");
-const tableName = tableNames.local_guides;
+const tableName = tableNames.localGuides;
 /**
  * @param {Knex} knex
  */

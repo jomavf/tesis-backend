@@ -1,6 +1,6 @@
 const Knex = require("../db/knex");
 const tableNames = require("../constants/tableNames");
-const tableName = tableNames.dish_type;
+const tableName = tableNames.dishType;
 /**
  * @param {Knex} knex
  */
