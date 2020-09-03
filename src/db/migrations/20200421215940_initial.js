@@ -54,7 +54,7 @@ exports.up = async (Knex) => {
     table.boolean("active");
     addDefaultColumns(table);
   });
-  await Knex.schema.createTable(tableNames.reservation_spa, (table) => {
+  await Knex.schema.createTable(tableNames.reservationSpa, (table) => {
     table.increments().notNullable();
     table.timestamp("start_time", { precision: 6 }).notNullable();
     table.timestamp("end_time", { precision: 6 }).notNullable();
@@ -63,7 +63,7 @@ exports.up = async (Knex) => {
     references(table, tableNames.spa);
     references(table, tableNames.guest);
   });
-  await Knex.schema.createTable(tableNames.reservation_event, (table) => {
+  await Knex.schema.createTable(tableNames.reservationEvent, (table) => {
     table.increments().notNullable();
     table.timestamp("start_time", { precision: 6 }).notNullable();
     table.timestamp("end_time", { precision: 6 }).notNullable();
@@ -72,7 +72,7 @@ exports.up = async (Knex) => {
     references(table, tableNames.event);
     references(table, tableNames.guest);
   });
-  await Knex.schema.createTable(tableNames.reservation_local, (table) => {
+  await Knex.schema.createTable(tableNames.reservationLocal, (table) => {
     table.increments().notNullable();
     table.timestamp("start_time", { precision: 6 }).notNullable();
     table.timestamp("end_time", { precision: 6 }).notNullable();
@@ -81,7 +81,7 @@ exports.up = async (Knex) => {
     references(table, tableNames.local);
     references(table, tableNames.guest);
   });
-  await Knex.schema.createTable(tableNames.reservation_restaurant, (table) => {
+  await Knex.schema.createTable(tableNames.reservationRestaurant, (table) => {
     table.increments().notNullable();
     table.timestamp("start_time", { precision: 6 }).notNullable();
     table.timestamp("end_time", { precision: 6 }).notNullable();
@@ -90,7 +90,7 @@ exports.up = async (Knex) => {
     references(table, tableNames.restaurant);
     references(table, tableNames.guest);
   });
-  await Knex.schema.createTable(tableNames.reservation_gym, (table) => {
+  await Knex.schema.createTable(tableNames.reservationGym, (table) => {
     table.increments().notNullable();
     table.timestamp("start_time", { precision: 6 }).notNullable();
     table.timestamp("end_time", { precision: 6 }).notNullable();
@@ -99,7 +99,7 @@ exports.up = async (Knex) => {
     references(table, tableNames.gym);
     references(table, tableNames.guest);
   });
-  await Knex.schema.createTable(tableNames.product_category, (table) => {
+  await Knex.schema.createTable(tableNames.productCategory, (table) => {
     table.increments().notNullable();
     table.string("name", 250);
     table.boolean("active");
@@ -115,7 +115,7 @@ exports.up = async (Knex) => {
     table.boolean("has_stock");
     table.boolean("active");
     addDefaultColumns(table);
-    references(table, tableNames.product_category);
+    references(table, tableNames.productCategory);
   });
   await Knex.schema.createTable(tableNames.account, (table) => {
     table.increments().notNullable();
@@ -136,7 +136,7 @@ exports.up = async (Knex) => {
     addDefaultColumns(table);
     references(table, tableNames.devices);
   });
-  await Knex.schema.createTable(tableNames.check_in, (table) => {
+  await Knex.schema.createTable(tableNames.checkIn, (table) => {
     table.increments().notNullable();
     addDefaultColumns(table);
     references(table, tableNames.room);
@@ -148,7 +148,7 @@ exports.up = async (Knex) => {
     table.string("password", 100).notNullable();
     addDefaultColumns(table);
   });
-  await Knex.schema.createTable(tableNames.hsia_package, (table) => {
+  await Knex.schema.createTable(tableNames.hsiaPackage, (table) => {
     table.increments().notNullable();
     table.string("name", 250);
     table.string("description", 250);
@@ -157,7 +157,7 @@ exports.up = async (Knex) => {
     table.integer("total_amount");
     addDefaultColumns(table);
   });
-  await Knex.schema.createTable(tableNames.hsia_subscription, (table) => {
+  await Knex.schema.createTable(tableNames.hsiaSubscription, (table) => {
     table.increments().notNullable();
     table.boolean("is_accepted");
     table.boolean("active");
@@ -167,11 +167,11 @@ exports.up = async (Knex) => {
     table.timestamp("acceptance_date", { precision: 6 }).notNullable();
     table.timestamp("cancellation_date", { precision: 6 }).notNullable();
     addDefaultColumns(table);
-    references(table, tableNames.hsia_package);
+    references(table, tableNames.hsiaPackage);
     references(table, tableNames.administrator);
     references(table, tableNames.guest);
   });
-  await Knex.schema.createTable(tableNames.dish_type, (table) => {
+  await Knex.schema.createTable(tableNames.dishType, (table) => {
     table.increments().notNullable();
     table.string("description", 250);
     table.boolean("active");
@@ -187,7 +187,7 @@ exports.up = async (Knex) => {
     table.boolean("active");
     addDefaultColumns(table);
     references(table, tableNames.restaurant);
-    references(table, tableNames.dish_type);
+    references(table, tableNames.dishType);
   });
   await Knex.schema.createTable(tableNames.transaction, (table) => {
     table.increments().notNullable();
@@ -201,26 +201,26 @@ exports.up = async (Knex) => {
     references(table, tableNames.product);
     references(table, tableNames.account);
   });
-  await Knex.schema.createTable(tableNames.in_room_service_types, (table) => {
+  await Knex.schema.createTable(tableNames.inRoomServiceTypes, (table) => {
     table.increments().notNullable();
     addDefaultColumns(table);
   });
-  await Knex.schema.createTable(tableNames.in_room_services, (table) => {
+  await Knex.schema.createTable(tableNames.inRoomServices, (table) => {
     table.increments().notNullable();
     addDefaultColumns(table);
-    references(table, tableNames.in_room_service_types);
+    references(table, tableNames.inRoomServiceTypes);
   });
-  await Knex.schema.createTable(tableNames.in_room_service_history, (table) => {
+  await Knex.schema.createTable(tableNames.inRoomServiceHistory, (table) => {
     table.increments().notNullable();
     addDefaultColumns(table);
-    references(table, tableNames.in_room_services);
+    references(table, tableNames.inRoomServices);
     references(table, tableNames.guest);
   });
-  await Knex.schema.createTable(tableNames.local_guides, (table) => {
+  await Knex.schema.createTable(tableNames.localGuides, (table) => {
     table.increments().notNullable();
     addDefaultColumns(table);
   });
-  await Knex.schema.createTable(tableNames.touristic_places, (table) => {
+  await Knex.schema.createTable(tableNames.touristicPlaces, (table) => {
     table.increments().notNullable();
     table.string("name", 250);
     table.string("description", 1000);
@@ -231,36 +231,33 @@ exports.up = async (Knex) => {
 };
 
 exports.down = async (Knex) => {
-  await Promise.all(
-    [
-      tableNames.touristic_places,
-      tableNames.local_guides,
-      tableNames.in_room_service_history,
-      tableNames.in_room_services,
-      tableNames.in_room_service_types,
-      tableNames.transaction,
-      tableNames.dish,
-      tableNames.dish_type,
-      tableNames.hsia_subscription,
-      tableNames.hsia_package,
-      tableNames.administrator,
-      tableNames.check_in,
-      tableNames.room,
-      tableNames.devices,
-      tableNames.account,
-      tableNames.product,
-      tableNames.product_category,
-      tableNames.reservation_gym,
-      tableNames.reservation_restaurant,
-      tableNames.reservation_local,
-      tableNames.reservation_event,
-      tableNames.reservation_spa,
-      tableNames.guest,
-      tableNames.event,
-      tableNames.local,
-      tableNames.gym,
-      tableNames.spa,
-      tableNames.restaurant,
-    ].map((tableName) => Knex.schema.dropTableIfExists(tableName))
-  );
+  return Knex.schema
+    .dropTableIfExists(tableNames.touristicPlaces)
+    .dropTableIfExists(tableNames.localGuides)
+    .dropTableIfExists(tableNames.inRoomServiceHistory)
+    .dropTableIfExists(tableNames.inRoomServices)
+    .dropTableIfExists(tableNames.inRoomServiceTypes)
+    .dropTableIfExists(tableNames.transaction)
+    .dropTableIfExists(tableNames.dish)
+    .dropTableIfExists(tableNames.dishType)
+    .dropTableIfExists(tableNames.hsiaSubscription)
+    .dropTableIfExists(tableNames.hsiaPackage)
+    .dropTableIfExists(tableNames.administrator)
+    .dropTableIfExists(tableNames.checkIn)
+    .dropTableIfExists(tableNames.room)
+    .dropTableIfExists(tableNames.devices)
+    .dropTableIfExists(tableNames.account)
+    .dropTableIfExists(tableNames.product)
+    .dropTableIfExists(tableNames.productCategory)
+    .dropTableIfExists(tableNames.reservationGym)
+    .dropTableIfExists(tableNames.reservationRestaurant)
+    .dropTableIfExists(tableNames.reservationLocal)
+    .dropTableIfExists(tableNames.reservationEvent)
+    .dropTableIfExists(tableNames.reservationSpa)
+    .dropTableIfExists(tableNames.guest)
+    .dropTableIfExists(tableNames.event)
+    .dropTableIfExists(tableNames.local)
+    .dropTableIfExists(tableNames.gym)
+    .dropTableIfExists(tableNames.spa)
+    .dropTableIfExists(tableNames.restaurant);
 };

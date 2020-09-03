@@ -100,23 +100,23 @@ exports.seed = async (knex) => {
     },
   ]);
 
-  await knex(tableNames.reservation_spa).del();
-  await knex.table(tableNames.reservation_spa).insert([]);
+  await knex(tableNames.reservationSpa).del();
+  await knex.table(tableNames.reservationSpa).insert([]);
 
-  await knex(tableNames.reservation_event).del();
-  await knex.table(tableNames.reservation_event).insert([]);
+  await knex(tableNames.reservationEvent).del();
+  await knex.table(tableNames.reservationEvent).insert([]);
 
-  await knex(tableNames.reservation_local).del();
-  await knex.table(tableNames.reservation_local).insert([]);
+  await knex(tableNames.reservationLocal).del();
+  await knex.table(tableNames.reservationLocal).insert([]);
 
-  await knex(tableNames.reservation_restaurant).del();
-  await knex.table(tableNames.reservation_restaurant).insert([]);
+  await knex(tableNames.reservationRestaurant).del();
+  await knex.table(tableNames.reservationRestaurant).insert([]);
 
-  await knex(tableNames.reservation_gym).del();
-  await knex.table(tableNames.reservation_gym).insert([]);
+  await knex(tableNames.reservationGym).del();
+  await knex.table(tableNames.reservationGym).insert([]);
 
-  await knex(tableNames.product_category).del();
-  await knex.table(tableNames.product_category).insert([
+  await knex(tableNames.productCategory).del();
+  await knex.table(tableNames.productCategory).insert([
     {
       name: "Postres",
       active: true,
@@ -194,8 +194,8 @@ exports.seed = async (knex) => {
   await knex(tableNames.room).del();
   await knex.table(tableNames.room).insert([]);
 
-  await knex(tableNames.check_in).del();
-  await knex.table(tableNames.check_in).insert([]);
+  await knex(tableNames.checkIn).del();
+  await knex.table(tableNames.checkIn).insert([]);
 
   await knex(tableNames.administrator).del();
   await knex.table(tableNames.administrator).insert([
@@ -205,14 +205,14 @@ exports.seed = async (knex) => {
     },
   ]);
 
-  await knex(tableNames.hsia_package).del();
-  await knex.table(tableNames.hsia_package).insert([]);
+  await knex(tableNames.hsiaPackage).del();
+  await knex.table(tableNames.hsiaPackage).insert([]);
 
-  await knex(tableNames.hsia_subscription).del();
-  await knex.table(tableNames.hsia_subscription).insert([]);
+  await knex(tableNames.hsiaPackage).del();
+  await knex.table(tableNames.hsiaPackage).insert([]);
 
-  await knex(tableNames.dish_type).del();
-  await knex.table(tableNames.dish_type).insert([]);
+  await knex(tableNames.dishType).del();
+  await knex.table(tableNames.dishType).insert([]);
 
   await knex(tableNames.dish).del();
   await knex.table(tableNames.dish).insert([]);
@@ -220,18 +220,18 @@ exports.seed = async (knex) => {
   await knex(tableNames.transaction).del();
   await knex.table(tableNames.transaction).insert([]);
 
-  await knex(tableNames.in_room_service_types).del();
-  await knex.table(tableNames.in_room_service_types).insert([]);
+  await knex(tableNames.inRoomServiceTypes).del();
+  await knex.table(tableNames.inRoomServiceTypes).insert([]);
 
-  await knex(tableNames.in_room_services).del();
-  await knex.table(tableNames.in_room_services).insert([]);
+  await knex(tableNames.inRoomServices).del();
+  await knex.table(tableNames.inRoomServices).insert([]);
 
-  await knex(tableNames.in_room_service_history).del();
-  await knex.table(tableNames.in_room_service_history).insert([]);
+  await knex(tableNames.inRoomServiceHistory).del();
+  await knex.table(tableNames.inRoomServiceHistory).insert([]);
 
-  await knex(tableNames.local_guides).del();
-  await knex.table(tableNames.local_guides).insert([]);
+  await knex(tableNames.localGuides).del();
+  await knex.table(tableNames.localGuides).insert([]);
 
-  await knex(tableNames.touristic_places).del();
-  await knex.table(tableNames.touristic_places).insert([]);
+  await knex(tableNames.touristicPlaces).del();
+  await knex.table(tableNames.touristicPlaces).insert([]);
 };
