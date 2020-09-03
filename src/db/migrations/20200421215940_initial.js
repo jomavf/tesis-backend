@@ -223,9 +223,9 @@ exports.up = async (Knex) => {
   await Knex.schema.createTable(tableNames.touristic_places, (table) => {
     table.increments().notNullable();
     table.string("name", 250);
-    table.string("description", 10000);
+    table.string("description", 1000);
     table.string("address", 250);
-    table.string("reference_address", 10000);
+    table.string("reference_address", 1000);
     addDefaultColumns(table);
   });
 };
