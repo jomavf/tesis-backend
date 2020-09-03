@@ -120,6 +120,11 @@ exports.up = async (Knex) => {
   await Knex.schema.createTable(tableNames.account, (table) => {
     table.increments().notNullable();
     addDefaultColumns(table);
+    table.string("currency_symbol", 250);
+    table.decimal("total_amount", 250);
+    table.timestamp("billing_date_start", { precision: 6 }).notNullable();
+    table.timestamp("billing_date_end", { precision: 6 }).notNullable();
+
     references(table, tableNames.guest);
   });
   await Knex.schema.createTable(tableNames.devices, (table) => {
@@ -187,6 +192,10 @@ exports.up = async (Knex) => {
   await Knex.schema.createTable(tableNames.transaction, (table) => {
     table.increments().notNullable();
     addDefaultColumns(table);
+    table.timestamp("transaction_datetime", { precision: 6 }).notNullable();
+    table.string("transaction_description", 250);
+    table.string("currency_symbol", 250);
+    table.decimal("amount", { precision: 2 });
     references(table, tableNames.dish);
     references(table, tableNames.guest);
     references(table, tableNames.product);
