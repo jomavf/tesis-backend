@@ -224,6 +224,7 @@ exports.up = async (Knex) => {
     table.increments().notNullable();
     table.string("name", 250);
     table.string("description", 1000);
+    table.string("img_url", 1000);
     table.string("address", 250);
     table.string("reference_address", 1000);
     addDefaultColumns(table);
