@@ -1,8 +1,9 @@
 const Knex = require("../db/knex");
 const tableNames = require("../constants/tableNames");
-const reservationRestaurantTable = tableNames.reservationRestaurant;
+const { guest } = require("../constants/tableNames");
+const tableName = tableNames.reservationRestaurant;
 const restaurantTable = tableNames.restaurant;
-const userTable = tableNames.user;
+const guestTable = tableNames.guest;
 
 /**
  * @param {Knex} knex
@@ -16,9 +17,9 @@ async function create({
   endTime = null,
 }) {
   if (!userId || !restaurantId) {
-    throw new Error('Especificar el campo "userId" o "restaurantId"');
+    throw new Error('Especificar el campo "guestId" o "restaurantId"');
   }
-  return await Knex(reservationRestaurantTable)
+  return await Knex(tableName)
     .insert({
       user_id: userId,
       restaurant_id: restaurantId,
@@ -32,21 +33,48 @@ async function create({
 async function getAll() {
   let reservations = [];
 
-  reservations = await Knex(reservationRestaurantTable)
+  reservations = await Knex(tableName)
     .join(
       restaurantTable,
       `${restaurantTable}.id`,
       "=",
-      `${reservationRestaurantTable}.restaurant_id`
+      `${tableName}.restaurant_id`
     )
+    .join(guestTable, `${guestTable}.id`, "=", `${tableName}.guest_id`)
     .select();
   return reservations;
 }
+
+async function upsert(data) {
+  if (data.id == null) {
+    // create
+    return await Knex(tableName)
+      .insert({
+        ...data,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      })
+      .returning("*");
+  } else {
+    //update
+    return await Knex(tableName)
+      .where("id", "=", data.id)
+      .update({
+        ...data,
+        updated_at: new Date().toISOString(),
+      })
+      .returning("*");
+  }
+}
+async function deleteById(id) {
+  return await Knex(tableName).where("id", "=", id).del();
+}
+
 function updateById() {}
-function deleteById() {}
 
 module.exports = {
   create,
+  upsert,
   getAll,
   updateById,
   deleteById,

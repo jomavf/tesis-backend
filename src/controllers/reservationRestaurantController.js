@@ -1,9 +1,33 @@
-const ReservationRestaurantService = require("../services/reservationRestaurantService");
+const service = require("../services/reservationRestaurantService");
+
+async function createOrUpdate(req, res, next) {
+  try {
+    const createdItem = await service.upsert(req.body);
+    res.status(200).json({
+      success: true,
+      data: createdItem,
+    });
+  } catch (error) {
+    next(error);
+  }
+}
+
+async function deleteById(req, res, next) {
+  try {
+    await service.deleteById(req.params.id);
+    res.status(200).json({
+      success: true,
+      data: null,
+    });
+  } catch (error) {
+    next(error);
+  }
+}
 
 async function create(req, res, next) {
   try {
     const data = req.body;
-    const newReservation = await ReservationRestaurantService.create(data);
+    const newReservation = await service.create(data);
     return res.json({
       success: true,
       data: newReservation,
@@ -15,7 +39,7 @@ async function create(req, res, next) {
 
 async function getAll(req, res, next) {
   try {
-    const reservations = await ReservationRestaurantService.getAll();
+    const reservations = await service.getAll();
     res.status(200).json({
       success: true,
       data: reservations,
@@ -26,11 +50,11 @@ async function getAll(req, res, next) {
 }
 
 function updateById(req, res, next) {}
-function deleteById(req, res, next) {}
 
 module.exports = {
   create,
   getAll,
+  createOrUpdate,
   updateById,
   deleteById,
 };

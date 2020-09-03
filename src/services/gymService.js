@@ -36,6 +36,9 @@ async function upsert(data) {
       .returning("*");
   }
 }
+async function deleteById(id) {
+  return await Knex(tableName).where("id", "=", id).del();
+}
 
 async function getAll({ name = null }) {
   if (name) {
@@ -46,10 +49,6 @@ async function getAll({ name = null }) {
   return await Knex(tableName).select();
 }
 function updateById() {}
-
-async function deleteById(id) {
-  return await Knex(tableName).where("id", "=", id).del();
-}
 
 module.exports = {
   create,

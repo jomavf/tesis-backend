@@ -43,10 +43,35 @@ async function getAll() {
   return reservations;
 }
 function updateById() {}
-function deleteById() {}
+
+async function upsert(data) {
+  if (data.id == null) {
+    // create
+    return await Knex(tableName)
+      .insert({
+        ...data,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      })
+      .returning("*");
+  } else {
+    //update
+    return await Knex(tableName)
+      .where("id", "=", data.id)
+      .update({
+        ...data,
+        updated_at: new Date().toISOString(),
+      })
+      .returning("*");
+  }
+}
+async function deleteById(id) {
+  return await Knex(tableName).where("id", "=", id).del();
+}
 
 module.exports = {
   create,
+  upsert,
   getAll,
   updateById,
   deleteById,
