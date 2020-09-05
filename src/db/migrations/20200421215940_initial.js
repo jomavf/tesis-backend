@@ -196,10 +196,10 @@ exports.up = async (Knex) => {
     table.string("transaction_description", 250);
     table.string("currency_symbol", 250);
     table.decimal("amount", { precision: 2 });
-    references(table, tableNames.dish);
+    references(table, tableNames.dish, false);
     references(table, tableNames.guest);
-    references(table, tableNames.product);
-    references(table, tableNames.account);
+    references(table, tableNames.product, false);
+    references(table, tableNames.account, false);
   });
   await Knex.schema.createTable(tableNames.inRoomServiceTypes, (table) => {
     table.increments().notNullable();
