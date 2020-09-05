@@ -164,11 +164,11 @@ exports.up = async (Knex) => {
     table.string("accepted_by", 250);
     table.integer("number_days");
     table.timestamp("application_date", { precision: 6 }).notNullable();
-    table.timestamp("acceptance_date", { precision: 6 }).notNullable();
-    table.timestamp("cancellation_date", { precision: 6 }).notNullable();
+    table.timestamp("acceptance_date", { precision: 6 });
+    table.timestamp("cancellation_date", { precision: 6 });
     addDefaultColumns(table);
     references(table, tableNames.hsiaPackage);
-    references(table, tableNames.administrator);
+    references(table, tableNames.administrator, false);
     references(table, tableNames.guest);
   });
   await Knex.schema.createTable(tableNames.dishType, (table) => {
