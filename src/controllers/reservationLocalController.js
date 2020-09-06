@@ -1,12 +1,11 @@
-const ReservationLocalService = require("../services/reservationLocalService");
+const service = require("../services/reservationLocalService");
 
-async function create(req, res, next) {
+async function createOrUpdate(req, res, next) {
   try {
-    const data = req.body;
-    const newReservation = await ReservationLocalService.create(data);
-    return res.json({
+    const createdItem = await service.upsert(req.body);
+    res.status(200).json({
       success: true,
-      data: newReservation,
+      data: createdItem,
     });
   } catch (error) {
     next(error);
@@ -15,7 +14,7 @@ async function create(req, res, next) {
 
 async function getAll(req, res, next) {
   try {
-    const reservations = await ReservationLocalService.getAll();
+    const reservations = await service.getAll();
     res.status(200).json({
       success: true,
       data: reservations,
@@ -25,12 +24,20 @@ async function getAll(req, res, next) {
   }
 }
 
-function updateById(req, res, next) {}
-function deleteById(req, res, next) {}
+async function deleteById(req, res, next) {
+  try {
+    await service.deleteById(req.params.id);
+    res.status(200).json({
+      success: true,
+      data: null,
+    });
+  } catch (error) {
+    next(error);
+  }
+}
 
 module.exports = {
-  create,
+  createOrUpdate,
   getAll,
-  updateById,
   deleteById,
 };
