@@ -1,7 +1,5 @@
 const service = require("../services/transactionService");
 
-function create(req, res, next) {}
-
 async function createOrUpdate(req, res, next) {
   try {
     const createdItem = await service.upsert(req.body);
