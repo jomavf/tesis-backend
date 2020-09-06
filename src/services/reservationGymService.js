@@ -1,8 +1,8 @@
 const Knex = require("../db/knex");
 const tableNames = require("../constants/tableNames");
-const reservationGymTable = tableNames.reservationGym;
+const tableName = tableNames.reservationGym;
 const gymTable = tableNames.gym;
-const userTable = tableNames.user;
+const guestTable = tableNames.guest;
 
 /**
  * @param {Knex} knex
@@ -18,7 +18,7 @@ async function create({
   if (!userId || !gymId) {
     throw new Error('Especificar el campo "userId" o "gymId"');
   }
-  return await Knex(reservationGymTable)
+  return await Knex(tableName)
     .insert({
       user_id: userId,
       gym_id: gymId,
@@ -28,16 +28,6 @@ async function create({
     })
     .returning("*");
 }
-
-async function getAll() {
-  let reservations = [];
-
-  reservations = await Knex(reservationGymTable)
-    .join(gymTable, `${gymTable}.id`, "=", `${reservationGymTable}.gym_id`)
-    .select();
-  return reservations;
-}
-function updateById() {}
 
 async function upsert(data) {
   if (data.id == null) {
@@ -60,6 +50,35 @@ async function upsert(data) {
       .returning("*");
   }
 }
+
+async function getAll() {
+  let reservations = [];
+  const domain = "gym";
+
+  reservations = await Knex(tableName)
+    .join(gymTable, `${gymTable}.id`, "=", `${tableName}.${domain}_id`)
+    .join(guestTable, `${guestTable}.id`, "=", `${tableName}.guest_id`).select(`
+      ${tableName}.*
+    `);
+  const newReservations = [];
+  for await (r of reservations) {
+    const domainKey = `${domain}_id`;
+    const guestKey = "guest_id";
+    const domainId = r[domainKey];
+    const guestId = r[guestKey];
+    const [domainData] = await Knex(gymTable)
+      .where("id", "=", domainId)
+      .select();
+    const [guest] = await Knex(guestTable).where("id", "=", guestId).select();
+    newReservations.push({
+      ...r,
+      [domain]: domainData,
+      guest,
+    });
+  }
+  return newReservations;
+}
+
 async function deleteById(id) {
   return await Knex(tableName).where("id", "=", id).del();
 }
@@ -68,6 +87,5 @@ module.exports = {
   create,
   upsert,
   getAll,
-  updateById,
   deleteById,
 };

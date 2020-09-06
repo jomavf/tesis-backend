@@ -1,6 +1,5 @@
 const service = require("../services/eventService");
 
-function create(req, res, next) {}
 async function createOrUpdate(req, res, next) {
   try {
     const createdItem = await service.upsert(req.body);
@@ -14,6 +13,7 @@ async function createOrUpdate(req, res, next) {
 }
 
 async function deleteById(req, res, next) {
+  console.log("heere");
   try {
     await service.deleteById(req.params.id);
     res.status(200).json({
@@ -38,7 +38,6 @@ async function getAll(req, res, next) {
 function updateById(req, res, next) {}
 
 module.exports = {
-  create,
   createOrUpdate,
   getAll,
   updateById,

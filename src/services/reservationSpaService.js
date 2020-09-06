@@ -1,8 +1,8 @@
 const Knex = require("../db/knex");
 const tableNames = require("../constants/tableNames");
-const reservationSpaTable = tableNames.reservationSpa;
+const tableName = tableNames.reservationSpa;
 const spaTable = tableNames.spa;
-const userTable = tableNames.user;
+const guestTable = tableNames.guest;
 
 /**
  * @param {Knex} knex
@@ -18,7 +18,7 @@ async function create({
   if (!userId || !spaId) {
     throw new Error('Especificar el campo "userId" o "spaId"');
   }
-  return await Knex(reservationSpaTable)
+  return await Knex(tableName)
     .insert({
       user_id: userId,
       spa_id: spaId,
@@ -28,16 +28,6 @@ async function create({
     })
     .returning("*");
 }
-
-async function getAll() {
-  let reservations = [];
-
-  reservations = await Knex(reservationSpaTable)
-    .join(spaTable, `${spaTable}.id`, "=", `${reservationSpaTable}.spa_id`)
-    .select();
-  return reservations;
-}
-function updateById() {}
 
 async function upsert(data) {
   if (data.id == null) {
@@ -60,6 +50,34 @@ async function upsert(data) {
       .returning("*");
   }
 }
+
+async function getAll() {
+  let reservations = [];
+  const domain = "spa";
+
+  reservations = await Knex(tableName)
+    .join(spaTable, `${spaTable}.id`, "=", `${tableName}.${domain}_id`)
+    .join(guestTable, `${guestTable}.id`, "=", `${tableName}.guest_id`).select(`
+      ${tableName}.*
+    `);
+  const newReservations = [];
+  for await (r of reservations) {
+    const domainKey = `${domain}_id`;
+    const guestKey = "guest_id";
+    const domainId = r[domainKey];
+    const guestId = r[guestKey];
+    const [domainData] = await Knex(spaTable)
+      .where("id", "=", domainId)
+      .select();
+    const [guest] = await Knex(guestTable).where("id", "=", guestId).select();
+    newReservations.push({
+      ...r,
+      [domain]: domainData,
+      guest,
+    });
+  }
+  return newReservations;
+}
 async function deleteById(id) {
   return await Knex(tableName).where("id", "=", id).del();
 }
@@ -67,7 +85,6 @@ async function deleteById(id) {
 module.exports = {
   create,
   getAll,
-  updateById,
   upsert,
   deleteById,
 };

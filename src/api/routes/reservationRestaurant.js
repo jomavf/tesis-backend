@@ -4,5 +4,6 @@ const ReservationRestaurantController = require("../../controllers/reservationRe
 
 router.get("/", ReservationRestaurantController.getAll);
 router.post("/", ReservationRestaurantController.createOrUpdate);
+router.delete("/:id", ReservationRestaurantController.deleteById);
 
 module.exports = router;
