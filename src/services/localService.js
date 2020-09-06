@@ -1,6 +1,6 @@
 const Knex = require("../db/knex");
 const tableNames = require("../constants/tableNames");
-const localTableName = tableNames.local;
+const tableName = tableNames.local;
 /**
  * @param {Knex} knex
  */
@@ -8,17 +8,41 @@ const localTableName = tableNames.local;
 function create() {}
 async function getAll({ name }) {
   if (name) {
-    return await Knex(localTableName)
+    return await Knex(tableName)
       .select()
-      .where(`${localTableName}.name`, "ilike", `%${name}%`);
+      .where(`${tableName}.name`, "ilike", `%${name}%`);
   }
-  return await Knex(localTableName).select();
+  return await Knex(tableName).select();
 }
 function updateById() {}
-function deleteById() {}
+
+async function upsert(data) {
+  if (data.id == null) {
+    // create
+    return await Knex(tableName)
+      .insert({
+        ...data,
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      })
+      .returning("*");
+  } else {
+    //update
+    return await Knex(tableName)
+      .where("id", "=", data.id)
+      .update({
+        ...data,
+        updated_at: new Date().toISOString(),
+      })
+      .returning("*");
+  }
+}
+async function deleteById(id) {
+  return await Knex(tableName).where("id", "=", id).del();
+}
 
 module.exports = {
-  create,
+  upsert,
   getAll,
   updateById,
   deleteById,
