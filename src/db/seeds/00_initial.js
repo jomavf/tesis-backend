@@ -294,10 +294,55 @@ exports.seed = async (knex) => {
   ]);
 
   await knex(tableNames.hsiaPackage).del();
-  await knex.table(tableNames.hsiaPackage).insert([]);
+  await knex.table(tableNames.hsiaPackage).insert([
+    {
+      name: "Personal",
+      description: "",
+      internet_speed: 5,
+      unit_measure: "Mbps",
+      total_amount: "15",
+    },
+    {
+      name: "Premium",
+      description: "",
+      internet_speed: 50,
+      unit_measure: "Mbps",
+      total_amount: "70",
+    },
+    {
+      name: "Coorporativo",
+      description: "",
+      internet_speed: 150,
+      unit_measure: "Mbps",
+      total_amount: "150",
+    },
+  ]);
 
-  await knex(tableNames.hsiaPackage).del();
-  await knex.table(tableNames.hsiaPackage).insert([]);
+  await knex(tableNames.hsiaSubscription).del();
+  await knex.table(tableNames.hsiaSubscription).insert([
+    {
+      is_accepted: false,
+      active: true,
+      accepted_by: "",
+      number_days: 10,
+      application_date: "2020-09-14T02:43:45.255Z",
+      cancellation_date: null,
+      hsia_package_id: 2,
+      administrator_id: null,
+      guest_id: 2,
+    },
+    {
+      is_accepted: false,
+      active: true,
+      accepted_by: "",
+      number_days: 4,
+      application_date: "2020-09-14T02:43:45.255Z",
+      cancellation_date: null,
+      hsia_package_id: 1,
+      administrator_id: null,
+      guest_id: 1,
+    },
+  ]);
 
   await knex(tableNames.dishType).del();
   await knex.table(tableNames.dishType).insert([]);

@@ -1,6 +1,9 @@
 const Knex = require("../db/knex");
 const tableNames = require("../constants/tableNames");
+
 const hsiaSubscriptionTableName = tableNames.hsiaSubscription;
+const guestTableName = tableNames.guest;
+const hsiaPackageTableName = tableNames.hsiaPackage;
 /**
  * @param {Knex} knex
  */
@@ -26,26 +29,48 @@ async function upsert(data) {
       })
       .returning("*");
   } else {
+    console.log(data);
     //update
     return await Knex(hsiaSubscriptionTableName)
       .where("id", "=", data.id)
       .update({
-        name: data.name,
-        description: data.description,
-        imgUrl: data.imgUrl,
-        updated_at: new Date().toISOString(),
+        is_accepted: data.is_accepted,
+        active: data.active,
       })
       .returning("*");
   }
 }
 
-async function getAll({ name = null }) {
+async function getAll({ name = null, active = null }) {
+  let hsiaSubscriptionItems = [];
   if (name) {
-    return await Knex(hsiaSubscriptionTableName)
+    hsiaSubscriptionItems = await Knex(hsiaSubscriptionTableName)
       .select()
       .where(`${hsiaSubscriptionTableName}.name`, "ilike", `%${name}%`);
+  } else if (active) {
+    hsiaSubscriptionItems = await Knex(hsiaSubscriptionTableName)
+      .select()
+      .where(`${hsiaSubscriptionTableName}.active`, "=", `${active}`);
+  } else {
+    hsiaSubscriptionItems = await Knex(hsiaSubscriptionTableName).select();
   }
-  return await Knex(hsiaSubscriptionTableName).select();
+  let hsiaSubscriptionItemsPopulated = [];
+
+  for await (const hsiaSub of hsiaSubscriptionItems) {
+    let [guest] = await Knex(guestTableName)
+      .select()
+      .where("id", "=", hsiaSub.guest_id);
+
+    let [hsia_package] = await Knex(hsiaPackageTableName)
+      .select()
+      .where("id", "=", hsiaSub.hsia_package_id);
+    hsiaSubscriptionItemsPopulated.push({
+      ...hsiaSub,
+      guest,
+      hsia_package,
+    });
+  }
+  return hsiaSubscriptionItemsPopulated;
 }
 function updateById() {}
 

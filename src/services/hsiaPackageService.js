@@ -40,12 +40,15 @@ async function upsert(data) {
 }
 
 async function getAll({ name = null }) {
+  let hsiaPackages = [];
   if (name) {
-    return await Knex(hsiaPackageTableName)
+    hsiaPackages = await Knex(hsiaPackageTableName)
       .select()
       .where(`${hsiaPackageTableName}.name`, "ilike", `%${name}%`);
+  } else {
+    hsiaPackages = await Knex(hsiaPackageTableName).select();
   }
-  return await Knex(hsiaPackageTableName).select();
+  return hsiaPackages;
 }
 
 function updateById() {}
