@@ -65,11 +65,43 @@ exports.seed = async (knex) => {
       name: "Evento 1",
       description: "Super evento",
       imgUrl: "https://via.placeholder.com/150",
+      type: "musica",
     },
     {
       name: "Evento 2",
       description: "Super Evento 2",
       imgUrl: "https://via.placeholder.com/150",
+      type: "arte",
+    },
+    {
+      name: "Evento 3",
+      description: "Super Evento 2",
+      imgUrl: "https://via.placeholder.com/150",
+      type: "moda",
+    },
+    {
+      name: "Evento 4",
+      description: "Super Evento 2",
+      imgUrl: "https://via.placeholder.com/150",
+      type: "charlas",
+    },
+    {
+      name: "Evento 5",
+      description: "Super Evento 2",
+      imgUrl: "https://via.placeholder.com/150",
+      type: "teatro",
+    },
+    {
+      name: "Evento 6",
+      description: "Super Evento 2",
+      imgUrl: "https://via.placeholder.com/150",
+      type: "moda",
+    },
+    {
+      name: "Evento 7",
+      description: "Super Evento 2",
+      imgUrl: "https://via.placeholder.com/150",
+      type: "arte",
     },
   ]);
   await knex(tableNames.guest).del();
@@ -188,11 +220,40 @@ exports.seed = async (knex) => {
   await knex(tableNames.account).del();
   await knex.table(tableNames.account).insert([]);
 
-  await knex(tableNames.devices).del();
-  await knex.table(tableNames.devices).insert([]);
+  await knex(tableNames.deviceAlexa).del();
+  await knex
+    .table(tableNames.deviceAlexa)
+    .insert([
+      { code: "1" },
+      { code: "2" },
+      { code: "3" },
+      { code: "4" },
+      { code: "5" },
+      { code: "6" },
+      { code: "7" },
+    ]);
+  await knex(tableNames.deviceTv).del();
+  await knex
+    .table(tableNames.deviceTv)
+    .insert([
+      { code: "1" },
+      { code: "2" },
+      { code: "3" },
+      { code: "4" },
+      { code: "5" },
+      { code: "6" },
+      { code: "7" },
+    ]);
 
   await knex(tableNames.room).del();
-  await knex.table(tableNames.room).insert([]);
+  await knex.table(tableNames.room).insert([
+    { device_alexa_id: "1", device_tv_id: "1" },
+    { device_alexa_id: "2", device_tv_id: "2" },
+    { device_alexa_id: "3", device_tv_id: "3" },
+    { device_alexa_id: "4", device_tv_id: "4" },
+    { device_alexa_id: "5", device_tv_id: "5" },
+    { device_alexa_id: "6", device_tv_id: "6" },
+  ]);
 
   await knex(tableNames.checkIn).del();
   await knex.table(tableNames.checkIn).insert([]);
@@ -201,7 +262,7 @@ exports.seed = async (knex) => {
   await knex.table(tableNames.administrator).insert([
     {
       email: "jose@gmail.com",
-      password: "F",
+      password: "u201315486",
     },
   ]);
 

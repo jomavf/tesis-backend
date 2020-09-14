@@ -6,11 +6,16 @@ const tableName = tableNames.event;
  */
 
 function create() {}
-async function getAll({ name = null }) {
+async function getAll({ name = null, type = "" }) {
   if (name) {
     return await Knex(tableName)
       .select()
       .where(`${tableName}.name`, "ilike", `%${name}%`);
+  }
+  if (type) {
+    return await Knex(tableName)
+      .select()
+      .where(`${tableName}.type`, "ilike", `%${type}%`);
   }
   return await Knex(tableName).select();
 }

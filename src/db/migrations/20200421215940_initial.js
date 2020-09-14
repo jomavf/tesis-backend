@@ -37,6 +37,7 @@ exports.up = async (Knex) => {
     table.increments().notNullable();
     table.string("name", 100).notNullable();
     table.string("description", 300).notNullable();
+    table.string("type", 300).notNullable();
     table.string("imgUrl", 300).notNullable();
     addDefaultColumns(table);
   });
@@ -127,14 +128,21 @@ exports.up = async (Knex) => {
 
     references(table, tableNames.guest);
   });
-  await Knex.schema.createTable(tableNames.devices, (table) => {
+  await Knex.schema.createTable(tableNames.deviceTv, (table) => {
     table.increments().notNullable();
+    table.string("code", 250);
+    addDefaultColumns(table);
+  });
+  await Knex.schema.createTable(tableNames.deviceAlexa, (table) => {
+    table.increments().notNullable();
+    table.string("code", 250);
     addDefaultColumns(table);
   });
   await Knex.schema.createTable(tableNames.room, (table) => {
     table.increments().notNullable();
     addDefaultColumns(table);
-    references(table, tableNames.devices);
+    references(table, tableNames.deviceAlexa);
+    references(table, tableNames.deviceTv);
   });
   await Knex.schema.createTable(tableNames.checkIn, (table) => {
     table.increments().notNullable();
@@ -246,7 +254,8 @@ exports.down = async (Knex) => {
     .dropTableIfExists(tableNames.administrator)
     .dropTableIfExists(tableNames.checkIn)
     .dropTableIfExists(tableNames.room)
-    .dropTableIfExists(tableNames.devices)
+    .dropTableIfExists(tableNames.deviceAlexa)
+    .dropTableIfExists(tableNames.deviceTv)
     .dropTableIfExists(tableNames.account)
     .dropTableIfExists(tableNames.product)
     .dropTableIfExists(tableNames.productCategory)

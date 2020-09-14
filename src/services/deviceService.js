@@ -1,6 +1,6 @@
 const Knex = require("../db/knex");
 const tableNames = require("../constants/tableNames");
-const tableName = tableNames.devices;
+const tableName = tableNames.deviceAlexa;
 /**
  * @param {Knex} knex
  */
