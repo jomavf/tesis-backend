@@ -37,6 +37,8 @@ exports.up = async (Knex) => {
     table.increments().notNullable();
     table.string("name", 100).notNullable();
     table.string("description", 300).notNullable();
+    table.timestamp("start_time", { precision: 6 }).notNullable();
+    table.timestamp("end_time", { precision: 6 }).notNullable();
     table.string("type", 300).notNullable();
     table.string("imgUrl", 300).notNullable();
     addDefaultColumns(table);
@@ -147,6 +149,8 @@ exports.up = async (Knex) => {
   await Knex.schema.createTable(tableNames.checkIn, (table) => {
     table.increments().notNullable();
     addDefaultColumns(table);
+    table.timestamp("start_date", { precision: 6 }).notNullable();
+    table.timestamp("end_date", { precision: 6 }).notNullable();
     references(table, tableNames.room);
     references(table, tableNames.guest);
   });

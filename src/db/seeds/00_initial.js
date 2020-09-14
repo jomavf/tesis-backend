@@ -66,42 +66,56 @@ exports.seed = async (knex) => {
       description: "Super evento",
       imgUrl: "https://via.placeholder.com/150",
       type: "musica",
+      start_time: "2020-09-14T01:27:18.926Z",
+      end_time: "2020-09-17T01:27:18.926Z",
     },
     {
       name: "Evento 2",
       description: "Super Evento 2",
       imgUrl: "https://via.placeholder.com/150",
       type: "arte",
+      start_time: "2020-09-14T01:27:18.926Z",
+      end_time: "2020-09-17T01:27:18.926Z",
     },
     {
       name: "Evento 3",
       description: "Super Evento 2",
       imgUrl: "https://via.placeholder.com/150",
       type: "moda",
+      start_time: "2020-09-14T01:27:18.926Z",
+      end_time: "2020-09-17T01:27:18.926Z",
     },
     {
       name: "Evento 4",
       description: "Super Evento 2",
       imgUrl: "https://via.placeholder.com/150",
       type: "charlas",
+      start_time: "2020-09-14T01:27:18.926Z",
+      end_time: "2020-09-17T01:27:18.926Z",
     },
     {
       name: "Evento 5",
       description: "Super Evento 2",
       imgUrl: "https://via.placeholder.com/150",
       type: "teatro",
+      start_time: "2020-09-14T01:27:18.926Z",
+      end_time: "2020-09-17T01:27:18.926Z",
     },
     {
       name: "Evento 6",
       description: "Super Evento 2",
       imgUrl: "https://via.placeholder.com/150",
       type: "moda",
+      start_time: "2020-09-14T01:27:18.926Z",
+      end_time: "2020-09-17T01:27:18.926Z",
     },
     {
       name: "Evento 7",
       description: "Super Evento 2",
       imgUrl: "https://via.placeholder.com/150",
       type: "arte",
+      start_time: "2020-09-14T01:27:18.926Z",
+      end_time: "2020-09-17T01:27:18.926Z",
     },
   ]);
   await knex(tableNames.guest).del();
@@ -256,7 +270,20 @@ exports.seed = async (knex) => {
   ]);
 
   await knex(tableNames.checkIn).del();
-  await knex.table(tableNames.checkIn).insert([]);
+  await knex.table(tableNames.checkIn).insert([
+    {
+      room_id: 1,
+      guest_id: 1,
+      start_date: "2020-09-14T01:23:45.431Z",
+      end_date: "2020-09-20T01:23:45.431Z",
+    },
+    {
+      room_id: 2,
+      guest_id: 2,
+      start_date: "2020-09-17T011:23:45.431Z",
+      end_date: "2020-09-20T01:23:45.431Z",
+    },
+  ]);
 
   await knex(tableNames.administrator).del();
   await knex.table(tableNames.administrator).insert([

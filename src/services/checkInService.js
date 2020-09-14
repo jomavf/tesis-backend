@@ -1,6 +1,8 @@
 const Knex = require("../db/knex");
 const tableNames = require("../constants/tableNames");
 const tableName = tableNames.checkIn;
+const GuestTableName = tableNames.guest;
+const RoomTableName = tableNames.room;
 /**
  * @param {Knex} knex
  */
@@ -38,12 +40,29 @@ async function upsert(data) {
 }
 
 async function getAll({ name = null }) {
+  let checkIns = [];
   if (name) {
-    return await Knex(tableName)
+    checkIns = await Knex(tableName)
       .select()
       .where(`${tableName}.name`, "ilike", `%${name}%`);
+  } else {
+    checkIns = await Knex(tableName).select();
   }
-  return await Knex(tableName).select();
+  let populatedCheckIns = [];
+  for await (const checkIn of checkIns) {
+    const [room] = await Knex(RoomTableName)
+      .select()
+      .where(`id`, "=", checkIn.room_id);
+    const [guest] = await Knex(GuestTableName)
+      .select()
+      .where(`id`, "=", checkIn.guest_id);
+    populatedCheckIns.push({
+      ...checkIn,
+      room,
+      guest,
+    });
+  }
+  return populatedCheckIns;
 }
 function updateById() {}
 
