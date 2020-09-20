@@ -192,6 +192,8 @@ exports.up = async (Knex) => {
   await Knex.schema.createTable(tableNames.dish, (table) => {
     table.increments().notNullable();
     table.string("name", 250);
+    table.string("description", 250);
+    table.string("small_description", 250);
     table.string("state", 250);
     table.string("photoUrl", 250);
     table.decimal("price", { precision: 6 }).notNullable();

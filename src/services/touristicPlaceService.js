@@ -27,6 +27,7 @@ async function upsert(data) {
       .returning("*");
   } else {
     //update
+    console.log(data);
     return await Knex(tableName)
       .where("id", "=", data.id)
       .update({

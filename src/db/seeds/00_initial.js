@@ -373,6 +373,8 @@ exports.seed = async (knex) => {
       state: "available",
       photoUrl: "http://www.depor.pe",
       price: 89.9,
+      description: "description description description description",
+      small_description: "description",
       active: true,
       restaurant_id: 1,
       dish_type_id: 2,
@@ -382,6 +384,8 @@ exports.seed = async (knex) => {
       state: "available",
       photoUrl: "http://www.depor.pe",
       price: 289.9,
+      description: "description description description description",
+      small_description: "description",
       active: true,
       restaurant_id: 2,
       dish_type_id: 2,
@@ -404,5 +408,30 @@ exports.seed = async (knex) => {
   await knex.table(tableNames.localGuides).insert([]);
 
   await knex(tableNames.touristicPlaces).del();
-  await knex.table(tableNames.touristicPlaces).insert([]);
+  await knex.table(tableNames.touristicPlaces).insert([
+    {
+      name: "Altamira",
+      description:
+        "Pinturas rupestres... Pinturas rupestres...  Pinturas rupestres...  Pinturas rupestres...  Pinturas rupestres...  Pinturas rupestres...  Pinturas rupestres...  Pinturas rupestres... ",
+      img_url: "http://depor.pe",
+      address: "Espania, Altamira",
+      reference_address: "al costado de portugal",
+    },
+    {
+      name: "Altamira 2",
+      description:
+        "Pinturas rupestres... Pinturas rupestres...  Pinturas rupestres...  Pinturas rupestres...  Pinturas rupestres...  Pinturas rupestres...  Pinturas rupestres...  Pinturas rupestres... ",
+      img_url: "http://depor2.pe",
+      address: "Portu, Altamira",
+      reference_address: "al costado de portugal",
+    },
+    {
+      name: "Altamira 3",
+      description:
+        "Pinturas rupestres... Pinturas rupestres...  Pinturas rupestres...  Pinturas rupestres...  Pinturas rupestres...  Pinturas rupestres...  Pinturas rupestres...  Pinturas rupestres... ",
+      img_url: "http://depor3.pe",
+      address: "Portu, Altamira 3",
+      reference_address: "al costado de portugal 3",
+    },
+  ]);
 };
