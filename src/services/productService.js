@@ -1,9 +1,12 @@
 const Knex = require("../db/knex");
 const tableNames = require("../constants/tableNames");
 const tableName = tableNames.product;
+const productCategorytableName = tableNames.productCategory;
 /**
  * @param {Knex} knex
  */
+
+const domain = "product_category";
 
 async function create(data) {
   return await Knex(tableName)
@@ -38,18 +41,51 @@ async function upsert(data) {
 }
 
 async function getAll({ name = null, category_id = null }) {
+  let products = [];
   if (name) {
-    return await Knex(tableName)
+    products = await Knex(tableName)
+      .join(
+        productCategorytableName,
+        `${productCategorytableName}.id`,
+        "=",
+        `${tableName}.${domain}_id`
+      )
       .select()
       .where(`${tableName}.name`, "ilike", `%${name}%`);
-  }
-  if (category_id) {
-    return await Knex(tableName)
+    return products;
+  } else if (category_id) {
+    products = await Knex(tableName)
+      .join(
+        productCategorytableName,
+        `${productCategorytableName}.id`,
+        "=",
+        `${tableName}.${domain}_id`
+      )
       .select()
       .where(`${tableName}.product_category_id`, "=", `${category_id}`);
+    return products;
+  } else {
+    products = await Knex(tableName).select();
   }
-  return await Knex(tableName).select();
+
+  const productWithCategory = [];
+
+  for await (const product of products) {
+    const category = await Knex(productCategorytableName)
+      .select()
+      .where(
+        `${productCategorytableName}.id`,
+        "=",
+        `${product.product_category_id}`
+      );
+    productWithCategory.push({
+      ...product,
+      category: category.length > 0 ? category[0] : null,
+    });
+  }
+  return productWithCategory;
 }
+
 function updateById() {}
 
 async function deleteById(id) {

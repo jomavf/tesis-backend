@@ -37,6 +37,7 @@ async function getAll(req, res, next) {
     next(error);
   }
 }
+
 function updateById(req, res, next) {}
 
 module.exports = {
