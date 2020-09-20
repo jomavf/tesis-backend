@@ -194,8 +194,7 @@ exports.up = async (Knex) => {
     table.string("name", 250);
     table.string("state", 250);
     table.string("photoUrl", 250);
-    table.timestamp("price", { precision: 6 }).notNullable();
-    table.decimal("total_amount", { precision: 2 });
+    table.decimal("price", { precision: 6 }).notNullable();
     table.boolean("active");
     addDefaultColumns(table);
     references(table, tableNames.restaurant);

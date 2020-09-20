@@ -345,10 +345,48 @@ exports.seed = async (knex) => {
   ]);
 
   await knex(tableNames.dishType).del();
-  await knex.table(tableNames.dishType).insert([]);
+  await knex.table(tableNames.dishType).insert([
+    {
+      description: "Tipico",
+    },
+    {
+      description: "Internacional",
+    },
+    {
+      description: "Andinos",
+    },
+    {
+      description: "Costa",
+    },
+    {
+      description: "Sierra",
+    },
+    {
+      description: "Selva",
+    },
+  ]);
 
   await knex(tableNames.dish).del();
-  await knex.table(tableNames.dish).insert([]);
+  await knex.table(tableNames.dish).insert([
+    {
+      name: "plato 1",
+      state: "available",
+      photoUrl: "http://www.depor.pe",
+      price: 89.9,
+      active: true,
+      restaurant_id: 1,
+      dish_type_id: 2,
+    },
+    {
+      name: "plato 2",
+      state: "available",
+      photoUrl: "http://www.depor.pe",
+      price: 289.9,
+      active: true,
+      restaurant_id: 2,
+      dish_type_id: 2,
+    },
+  ]);
 
   await knex(tableNames.transaction).del();
   await knex.table(tableNames.transaction).insert([]);
