@@ -188,6 +188,11 @@ exports.seed = async (knex) => {
       description:
         "El mejor postre del hotel, recomendacion especial del chef.",
       price: 9.99,
+
+      soles: 9.99,
+      euro: 2.99,
+      dollar: 3.99,
+
       quantity: 40,
       has_stock: true,
       img_url:
@@ -202,6 +207,11 @@ exports.seed = async (knex) => {
       description:
         "Wisky Limenio Hecho con las mejores uvas de las afueras de Lima.",
       price: 99.99,
+
+      soles: 99.99,
+      euro: 29.99,
+      dollar: 39.99,
+
       quantity: 10,
       has_stock: true,
       active: true,
@@ -212,6 +222,11 @@ exports.seed = async (knex) => {
       description: "La mejor bebida del Peru.",
       img_url: "http://upload.wikimedia.org/wikipedia/en/9/9d/Inca_Kola.jpg",
       price: 4.99,
+
+      soles: 4.99,
+      euro: 0.99,
+      dollar: 1.99,
+
       quantity: 29,
       has_stock: true,
       active: true,
@@ -222,6 +237,11 @@ exports.seed = async (knex) => {
       description:
         "Ricas papas crocantes hechas con las mejores papas del Peru",
       price: 2.99,
+
+      soles: 2.99,
+      euro: 0.59,
+      dollar: 0.99,
+
       quantity: 19,
       has_stock: true,
       img_url:

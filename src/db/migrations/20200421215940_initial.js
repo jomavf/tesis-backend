@@ -133,6 +133,11 @@ exports.up = async (Knex) => {
     table.string("name", 250);
     table.string("description", 250);
     table.decimal("price", { precision: 2 });
+
+    table.decimal("soles", { precision: 2 });
+    table.decimal("euro", { precision: 2 });
+    table.decimal("dollar", { precision: 2 });
+
     table.integer("quantity");
     table.string("img_url");
     table.boolean("has_stock");
@@ -228,7 +233,13 @@ exports.up = async (Knex) => {
     table.timestamp("transaction_datetime", { precision: 6 }).notNullable();
     table.string("transaction_description", 250);
     table.string("currency_symbol", 250);
+
     table.decimal("amount", { precision: 2 });
+
+    table.decimal("soles", { precision: 2 });
+    table.decimal("euro", { precision: 2 });
+    table.decimal("dollar", { precision: 2 });
+
     references(table, tableNames.dish, false);
     references(table, tableNames.guest);
     references(table, tableNames.product, false);
@@ -272,8 +283,7 @@ exports.down = async (Knex) => {
     .dropTableIfExists(tableNames.inRoomServices)
     .dropTableIfExists(tableNames.inRoomServiceTypes)
     .dropTableIfExists(tableNames.transaction)
-    .dropTableIfExists(tableNames.dish)
-    .dropTableIfExists(tableNames.dishType)
+
     .dropTableIfExists(tableNames.hsiaSubscription)
     .dropTableIfExists(tableNames.hsiaPackage)
     .dropTableIfExists(tableNames.administrator)
@@ -286,6 +296,10 @@ exports.down = async (Knex) => {
     .dropTableIfExists(tableNames.productCategory)
     .dropTableIfExists(tableNames.reservationGym)
     .dropTableIfExists(tableNames.reservationRestaurant)
+
+    .dropTableIfExists(tableNames.dish)
+    .dropTableIfExists(tableNames.dishType)
+
     .dropTableIfExists(tableNames.reservationLocal)
     .dropTableIfExists(tableNames.reservationEvent)
     .dropTableIfExists(tableNames.reservationSpa)
