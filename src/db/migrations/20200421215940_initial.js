@@ -84,6 +84,25 @@ exports.up = async (Knex) => {
     references(table, tableNames.local);
     references(table, tableNames.guest);
   });
+  await Knex.schema.createTable(tableNames.dishType, (table) => {
+    table.increments().notNullable();
+    table.string("description", 250);
+    table.boolean("active");
+    addDefaultColumns(table);
+  });
+  await Knex.schema.createTable(tableNames.dish, (table) => {
+    table.increments().notNullable();
+    table.string("name", 250);
+    table.string("description", 250);
+    table.string("small_description", 250);
+    table.string("state", 250);
+    table.string("photoUrl", 250);
+    table.decimal("price", { precision: 6 }).notNullable();
+    table.boolean("active");
+    addDefaultColumns(table);
+    references(table, tableNames.restaurant);
+    references(table, tableNames.dishType);
+  });
   await Knex.schema.createTable(tableNames.reservationRestaurant, (table) => {
     table.increments().notNullable();
     table.timestamp("start_time", { precision: 6 }).notNullable();
@@ -92,6 +111,7 @@ exports.up = async (Knex) => {
     addDefaultColumns(table);
     references(table, tableNames.restaurant);
     references(table, tableNames.guest);
+    references(table, tableNames.dish);
   });
   await Knex.schema.createTable(tableNames.reservationGym, (table) => {
     table.increments().notNullable();
@@ -183,25 +203,25 @@ exports.up = async (Knex) => {
     references(table, tableNames.administrator, false);
     references(table, tableNames.guest);
   });
-  await Knex.schema.createTable(tableNames.dishType, (table) => {
-    table.increments().notNullable();
-    table.string("description", 250);
-    table.boolean("active");
-    addDefaultColumns(table);
-  });
-  await Knex.schema.createTable(tableNames.dish, (table) => {
-    table.increments().notNullable();
-    table.string("name", 250);
-    table.string("description", 250);
-    table.string("small_description", 250);
-    table.string("state", 250);
-    table.string("photoUrl", 250);
-    table.decimal("price", { precision: 6 }).notNullable();
-    table.boolean("active");
-    addDefaultColumns(table);
-    references(table, tableNames.restaurant);
-    references(table, tableNames.dishType);
-  });
+  // await Knex.schema.createTable(tableNames.dishType, (table) => {
+  //   table.increments().notNullable();
+  //   table.string("description", 250);
+  //   table.boolean("active");
+  //   addDefaultColumns(table);
+  // });
+  // await Knex.schema.createTable(tableNames.dish, (table) => {
+  //   table.increments().notNullable();
+  //   table.string("name", 250);
+  //   table.string("description", 250);
+  //   table.string("small_description", 250);
+  //   table.string("state", 250);
+  //   table.string("photoUrl", 250);
+  //   table.decimal("price", { precision: 6 }).notNullable();
+  //   table.boolean("active");
+  //   addDefaultColumns(table);
+  //   references(table, tableNames.restaurant);
+  //   references(table, tableNames.dishType);
+  // });
   await Knex.schema.createTable(tableNames.transaction, (table) => {
     table.increments().notNullable();
     addDefaultColumns(table);
