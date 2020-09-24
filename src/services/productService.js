@@ -46,12 +46,10 @@ async function getAll({ name = null, category_id = null }) {
     products = await Knex(tableName)
       .select()
       .where(`${tableName}.name`, "ilike", `%${name}%`);
-    return products;
   } else if (category_id) {
     products = await Knex(tableName)
       .select()
       .where(`${tableName}.product_category_id`, "=", `${category_id}`);
-    return products;
   } else {
     products = await Knex(tableName).select();
   }
@@ -61,11 +59,7 @@ async function getAll({ name = null, category_id = null }) {
   for await (const product of products) {
     const category = await Knex(productCategorytableName)
       .select()
-      .where(
-        `${productCategorytableName}.id`,
-        "=",
-        `${product.product_category_id}`
-      );
+      .where(`id`, "=", `${product.product_category_id}`);
     productWithCategory.push({
       ...product,
       category: category.length > 0 ? category[0] : null,
