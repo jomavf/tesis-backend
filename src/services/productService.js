@@ -44,23 +44,11 @@ async function getAll({ name = null, category_id = null }) {
   let products = [];
   if (name) {
     products = await Knex(tableName)
-      .join(
-        productCategorytableName,
-        `${productCategorytableName}.id`,
-        "=",
-        `${tableName}.${domain}_id`
-      )
       .select()
       .where(`${tableName}.name`, "ilike", `%${name}%`);
     return products;
   } else if (category_id) {
     products = await Knex(tableName)
-      .join(
-        productCategorytableName,
-        `${productCategorytableName}.id`,
-        "=",
-        `${tableName}.${domain}_id`
-      )
       .select()
       .where(`${tableName}.product_category_id`, "=", `${category_id}`);
     return products;

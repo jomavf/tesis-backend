@@ -121,6 +121,30 @@ exports.seed = async (knex) => {
   await knex(tableNames.guest).del();
   await knex.table(tableNames.guest).insert([
     {
+      first_name: "Kevin",
+      last_name: "Riveros",
+      document_number: "934732984",
+      document_type: "dni",
+      email: "kevin_riveros@gmail.com",
+      address: "Av. San J. Miraflores",
+      number_phone: "9423094383",
+      city: "Lima",
+      country: "Peru",
+      active: true,
+    },
+    {
+      first_name: "Sofia",
+      last_name: "Castillo",
+      document_number: "932847392",
+      document_type: "dni",
+      email: "sofia_castillo@gmail.com",
+      address: "adventures work",
+      number_phone: "9384374987",
+      city: "Brazil",
+      country: "Brazil",
+      active: true,
+    },
+    {
       first_name: "Alonso",
       last_name: "Arias Cespedes",
       document_number: "58473622",
