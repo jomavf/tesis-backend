@@ -189,14 +189,19 @@ exports.seed = async (knex) => {
   await knex.table(tableNames.productCategory).insert([
     {
       name: "Postres",
+      img_url:
+        "https://www.tunicaragua.com/images/stories/virtuemart/category/categorybanner_postres2.jpg",
       active: true,
     },
     {
       name: "Licores",
+      img_url:
+        "https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=104675271310582",
       active: true,
     },
     {
       name: "Bebidas",
+      img_url: "https://i.ytimg.com/vi/TWdIkh-A_uA/maxresdefault.jpg",
       active: true,
     },
     {
@@ -451,6 +456,19 @@ exports.seed = async (knex) => {
   await knex(tableNames.localGuides).del();
   await knex.table(tableNames.localGuides).insert([]);
 
+  await knex(tableNames.touristicPlacesType).del();
+  await knex.table(tableNames.touristicPlacesType).insert([
+    {
+      name: "Museos",
+    },
+    {
+      name: "Ruinas",
+    },
+    {
+      name: "Palacios",
+    },
+  ]);
+
   await knex(tableNames.touristicPlaces).del();
   await knex.table(tableNames.touristicPlaces).insert([
     {
@@ -460,6 +478,7 @@ exports.seed = async (knex) => {
       img_url: "http://depor.pe",
       address: "Espania, Altamira",
       reference_address: "al costado de portugal",
+      touristic_places_type_id: 1,
     },
     {
       name: "Altamira 2",
@@ -468,6 +487,7 @@ exports.seed = async (knex) => {
       img_url: "http://depor2.pe",
       address: "Portu, Altamira",
       reference_address: "al costado de portugal",
+      touristic_places_type_id: 2,
     },
     {
       name: "Altamira 3",
@@ -476,6 +496,7 @@ exports.seed = async (knex) => {
       img_url: "http://depor3.pe",
       address: "Portu, Altamira 3",
       reference_address: "al costado de portugal 3",
+      touristic_places_type_id: 3,
     },
   ]);
 };

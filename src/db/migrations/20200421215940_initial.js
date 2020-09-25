@@ -125,6 +125,7 @@ exports.up = async (Knex) => {
   await Knex.schema.createTable(tableNames.productCategory, (table) => {
     table.increments().notNullable();
     table.string("name", 250);
+    table.string("img_url", 1000);
     table.boolean("active");
     addDefaultColumns(table);
   });
@@ -260,10 +261,18 @@ exports.up = async (Knex) => {
     references(table, tableNames.inRoomServices);
     references(table, tableNames.guest);
   });
+
   await Knex.schema.createTable(tableNames.localGuides, (table) => {
     table.increments().notNullable();
     addDefaultColumns(table);
   });
+
+  await Knex.schema.createTable(tableNames.touristicPlacesType, (table) => {
+    table.increments().notNullable();
+    table.string("name", 250);
+    addDefaultColumns(table);
+  });
+
   await Knex.schema.createTable(tableNames.touristicPlaces, (table) => {
     table.increments().notNullable();
     table.string("name", 250);
@@ -272,18 +281,19 @@ exports.up = async (Knex) => {
     table.string("address", 250);
     table.string("reference_address", 1000);
     addDefaultColumns(table);
+    references(table, tableNames.touristicPlacesType);
   });
 };
 
 exports.down = async (Knex) => {
   return Knex.schema
-    .dropTableIfExists(tableNames.touristicPlaces)
     .dropTableIfExists(tableNames.localGuides)
     .dropTableIfExists(tableNames.inRoomServiceHistory)
     .dropTableIfExists(tableNames.inRoomServices)
     .dropTableIfExists(tableNames.inRoomServiceTypes)
     .dropTableIfExists(tableNames.transaction)
-
+    .dropTableIfExists(tableNames.touristicPlaces)
+    .dropTableIfExists(tableNames.touristicPlacesType)
     .dropTableIfExists(tableNames.hsiaSubscription)
     .dropTableIfExists(tableNames.hsiaPackage)
     .dropTableIfExists(tableNames.administrator)
