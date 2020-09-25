@@ -15,6 +15,7 @@ const administratorRouter = require("./administrator");
 const hsiaPackageRouter = require("./hsiaPackage");
 const hsiaSubscriptionRouter = require("./hsiaSubscription");
 const guestRouter = require("./guest");
+const touristicPlacesTypesRouter = require("./touristicPlacesTypesRouter");
 
 const productRouter = require("./product");
 const productCategoryRouter = require("./productCategory");
@@ -45,6 +46,7 @@ router.use("/reservation-gyms", reservationGymRouter);
 router.use("/hsia-packages", hsiaPackageRouter);
 router.use("/hsia-subscriptions", hsiaSubscriptionRouter);
 router.use("/guests", guestRouter);
+router.use("/touristic-places-types", touristicPlacesTypesRouter);
 
 router.use("/products", productRouter);
 router.use("/product-categories", productCategoryRouter);
