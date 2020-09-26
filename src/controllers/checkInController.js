@@ -8,12 +8,6 @@ function create(req, res, next) {}
 async function createOrUpdate(req, res, next) {
   try {
     const { language, should_show_on_boarding, currency, ...rest } = req.body;
-    console.log("{ language, should_show_on_boarding, currency, ...rest }", {
-      language,
-      should_show_on_boarding,
-      currency,
-      ...rest,
-    });
     const [createdConfiguration] = await configurationService.upsert({
       language,
       should_show_on_boarding,
@@ -30,7 +24,6 @@ async function createOrUpdate(req, res, next) {
         billing_date_end: createdItem.end_date,
         guest_id: createdItem.guest_id,
       });
-      console.log("creteadItem", JSON.stringify(createdAccount));
     }
 
     res.status(200).json({

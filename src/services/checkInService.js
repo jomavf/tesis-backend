@@ -40,12 +40,16 @@ async function upsert(data) {
   }
 }
 
-async function getAll({ name = null }) {
+async function getAll({ name = null, guest_id = null }) {
   let checkIns = [];
   if (name) {
     checkIns = await Knex(tableName)
       .select()
       .where(`${tableName}.name`, "ilike", `%${name}%`);
+  } else if (guest_id) {
+    checkIns = await Knex(tableName)
+      .select()
+      .where(`${tableName}.guest_id`, "=", guest_id);
   } else {
     checkIns = await Knex(tableName).select();
   }
