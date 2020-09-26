@@ -189,23 +189,31 @@ exports.seed = async (knex) => {
   await knex.table(tableNames.productCategory).insert([
     {
       name: "Postres",
+      name_en: "Desserts",
+      name_po: "Sobremesas",
       img_url:
         "https://www.tunicaragua.com/images/stories/virtuemart/category/categorybanner_postres2.jpg",
       active: true,
     },
     {
       name: "Licores",
+      name_en: "Spirits",
+      name_po: "Espíritos",
       img_url:
         "https://lookaside.fbsbx.com/lookaside/crawler/media/?media_id=104675271310582",
       active: true,
     },
     {
       name: "Bebidas",
+      name_en: "Drinks",
+      name_po: "Bebidas",
       img_url: "https://i.ytimg.com/vi/TWdIkh-A_uA/maxresdefault.jpg",
       active: true,
     },
     {
       name: "Piqueos",
+      name_en: "Snacks",
+      name_po: "Lanches",
       active: true,
     },
   ]);
@@ -335,6 +343,11 @@ exports.seed = async (knex) => {
       currency: "euros", // euros, dolares
       should_show_on_boarding: true,
     },
+    {
+      language: "portugues",
+      currency: "euros", // euros, dolares
+      should_show_on_boarding: true,
+    },
   ]);
 
   await knex(tableNames.checkIn).del();
@@ -417,22 +430,19 @@ exports.seed = async (knex) => {
   await knex(tableNames.dishType).del();
   await knex.table(tableNames.dishType).insert([
     {
-      description: "Tipico",
+      description: "Desayuno",
+      description_en: "Breakfast",
+      description_po: "Café da manhã",
     },
     {
-      description: "Internacional",
+      description: "Almuerzo",
+      description_en: "Lunch",
+      description_po: "Almoço",
     },
     {
-      description: "Andinos",
-    },
-    {
-      description: "Costa",
-    },
-    {
-      description: "Sierra",
-    },
-    {
-      description: "Selva",
+      description: "Cena",
+      description_en: "Dinner",
+      description_po: "Jantar",
     },
   ]);
 
@@ -481,12 +491,18 @@ exports.seed = async (knex) => {
   await knex.table(tableNames.touristicPlacesType).insert([
     {
       name: "Museos",
+      name_en: "Museums",
+      name_po: "Museus",
     },
     {
       name: "Ruinas",
+      name_en: "Ruins",
+      name_po: "Ruínas",
     },
     {
       name: "Palacios",
+      name_en: "Palaces",
+      name_po: "Palácios",
     },
   ]);
 

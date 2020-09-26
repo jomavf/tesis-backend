@@ -31,6 +31,7 @@ const inRoomServiceHistoryRouter = require("./inRoomServiceHistory");
 const inRoomServiceTypeRouter = require("./inRoomServiceType");
 const devicesRouter = require("./device");
 const accountRouter = require("./account");
+const configurationRouter = require("./configuration");
 
 router.use("/restaurants", restaurantsRouter);
 router.use("/gyms", gymsRouter);
@@ -62,5 +63,6 @@ router.use("/in-room-service-histories", inRoomServiceHistoryRouter);
 router.use("/in-room-service-types", inRoomServiceTypeRouter);
 router.use("/devices", devicesRouter);
 router.use("/accounts", accountRouter);
+router.use("/configurations", configurationRouter);
 
 module.exports = router;

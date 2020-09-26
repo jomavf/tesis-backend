@@ -87,6 +87,8 @@ exports.up = async (Knex) => {
   await Knex.schema.createTable(tableNames.dishType, (table) => {
     table.increments().notNullable();
     table.string("description", 250);
+    table.string("description_en", 250);
+    table.string("description_po", 250);
     table.boolean("active");
     addDefaultColumns(table);
   });
@@ -125,6 +127,8 @@ exports.up = async (Knex) => {
   await Knex.schema.createTable(tableNames.productCategory, (table) => {
     table.increments().notNullable();
     table.string("name", 250);
+    table.string("name_en", 250);
+    table.string("name_po", 250);
     table.string("img_url", 1000);
     table.boolean("active");
     addDefaultColumns(table);
@@ -278,6 +282,8 @@ exports.up = async (Knex) => {
   await Knex.schema.createTable(tableNames.touristicPlacesType, (table) => {
     table.increments().notNullable();
     table.string("name", 250);
+    table.string("name_en", 250);
+    table.string("name_po", 250);
     addDefaultColumns(table);
   });
 
