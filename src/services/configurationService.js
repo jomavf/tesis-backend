@@ -1,9 +1,6 @@
 const Knex = require("../db/knex");
 const tableNames = require("../constants/tableNames");
-const tableName = tableNames.checkIn;
-const GuestTableName = tableNames.guest;
-const RoomTableName = tableNames.room;
-const ConfigurationTableName = tableNames.configuration;
+const tableName = tableNames.configuration;
 /**
  * @param {Knex} knex
  */
@@ -39,41 +36,19 @@ async function upsert(data) {
       .returning("*");
   }
 }
-
-async function getAll({ name = null }) {
-  let checkIns = [];
-  if (name) {
-    checkIns = await Knex(tableName)
-      .select()
-      .where(`${tableName}.name`, "ilike", `%${name}%`);
-  } else {
-    checkIns = await Knex(tableName).select();
-  }
-  let populatedCheckIns = [];
-  for await (const checkIn of checkIns) {
-    const [room] = await Knex(RoomTableName)
-      .select()
-      .where(`id`, "=", checkIn.room_id);
-    const [guest] = await Knex(GuestTableName)
-      .select()
-      .where(`id`, "=", checkIn.guest_id);
-    const [configuration] = await Knex(ConfigurationTableName)
-      .select()
-      .where(`id`, "=", checkIn.configuration_id);
-    populatedCheckIns.push({
-      ...checkIn,
-      room,
-      guest,
-      configuration,
-    });
-  }
-  return populatedCheckIns;
-}
-function updateById() {}
-
 async function deleteById(id) {
   return await Knex(tableName).where("id", "=", id).del();
 }
+
+async function getAll({ name = null }) {
+  if (name) {
+    return await Knex(tableName)
+      .select()
+      .where(`${tableName}.name`, "ilike", `%${name}%`);
+  }
+  return await Knex(tableName).select();
+}
+function updateById() {}
 
 module.exports = {
   create,

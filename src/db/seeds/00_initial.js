@@ -318,6 +318,25 @@ exports.seed = async (knex) => {
     { device_alexa_id: "6", device_tv_id: "6" },
   ]);
 
+  await knex(tableNames.configuration).del();
+  await knex.table(tableNames.configuration).insert([
+    {
+      language: "español",
+      currency: "soles", // euros, dolares
+      should_show_on_boarding: true,
+    },
+    {
+      language: "ingles",
+      currency: "dolares", // euros, dolares
+      should_show_on_boarding: false,
+    },
+    {
+      language: "ingles",
+      currency: "euros", // euros, dolares
+      should_show_on_boarding: true,
+    },
+  ]);
+
   await knex(tableNames.checkIn).del();
   await knex.table(tableNames.checkIn).insert([
     {
@@ -325,12 +344,14 @@ exports.seed = async (knex) => {
       guest_id: 1,
       start_date: "2020-09-14T01:23:45.431Z",
       end_date: "2020-09-20T01:23:45.431Z",
+      configuration_id: 1,
     },
     {
       room_id: 2,
       guest_id: 2,
       start_date: "2020-09-17T011:23:45.431Z",
       end_date: "2020-09-20T01:23:45.431Z",
+      configuration_id: 2,
     },
   ]);
 

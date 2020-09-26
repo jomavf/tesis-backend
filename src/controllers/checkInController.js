@@ -1,11 +1,28 @@
 const service = require("../services/checkInService");
 const AccountService = require("../services/accountService");
+const ConfigurationService = require("../services/configurationService");
+const configurationService = require("../services/configurationService");
 
 function create(req, res, next) {}
 
 async function createOrUpdate(req, res, next) {
   try {
-    const [createdItem] = await service.upsert(req.body);
+    const { language, should_show_on_boarding, currency, ...rest } = req.body;
+    console.log("{ language, should_show_on_boarding, currency, ...rest }", {
+      language,
+      should_show_on_boarding,
+      currency,
+      ...rest,
+    });
+    const [createdConfiguration] = await configurationService.upsert({
+      language,
+      should_show_on_boarding,
+      currency,
+    });
+    const [createdItem] = await service.upsert({
+      ...rest,
+      configuration_id: createdConfiguration.id,
+    });
     if (createdItem) {
       const createdAccount = await AccountService.create({
         total_amount: 0,

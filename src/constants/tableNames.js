@@ -1,4 +1,5 @@
 module.exports = {
+  configuration: "configuration",
   touristicPlacesType: "touristic_places_type",
   restaurant: "restaurant",
   spa: "spa",

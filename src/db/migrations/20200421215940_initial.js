@@ -172,6 +172,13 @@ exports.up = async (Knex) => {
     references(table, tableNames.deviceAlexa);
     references(table, tableNames.deviceTv);
   });
+  await Knex.schema.createTable(tableNames.configuration, (table) => {
+    table.increments().notNullable();
+    addDefaultColumns(table);
+    table.string("language", 30);
+    table.string("currency", 30);
+    table.boolean("should_show_on_boarding");
+  });
   await Knex.schema.createTable(tableNames.checkIn, (table) => {
     table.increments().notNullable();
     addDefaultColumns(table);
@@ -179,6 +186,7 @@ exports.up = async (Knex) => {
     table.timestamp("end_date", { precision: 6 }).notNullable();
     references(table, tableNames.room);
     references(table, tableNames.guest);
+    references(table, tableNames.configuration);
   });
   await Knex.schema.createTable(tableNames.administrator, (table) => {
     table.increments().notNullable();
@@ -298,6 +306,7 @@ exports.down = async (Knex) => {
     .dropTableIfExists(tableNames.hsiaPackage)
     .dropTableIfExists(tableNames.administrator)
     .dropTableIfExists(tableNames.checkIn)
+    .dropTableIfExists(tableNames.configuration)
     .dropTableIfExists(tableNames.room)
     .dropTableIfExists(tableNames.deviceAlexa)
     .dropTableIfExists(tableNames.deviceTv)
