@@ -8,39 +8,39 @@ exports.up = async (Knex) => {
   await Knex.schema.createTable(tableNames.restaurant, (table) => {
     table.increments().notNullable();
     table.string("name", 100).notNullable();
-    table.string("description", 300).notNullable();
-    table.string("imgUrl", 300).notNullable();
+    table.string("description", 900).notNullable();
+    table.string("imgUrl", 500).notNullable();
     addDefaultColumns(table);
   });
   await Knex.schema.createTable(tableNames.spa, (table) => {
     table.increments().notNullable();
     table.string("name", 100).notNullable();
-    table.string("description", 300).notNullable();
-    table.string("imgUrl", 300).notNullable();
+    table.string("description", 800).notNullable();
+    table.string("imgUrl", 500).notNullable();
     addDefaultColumns(table);
   });
   await Knex.schema.createTable(tableNames.gym, (table) => {
     table.increments().notNullable();
     table.string("name", 100).notNullable();
-    table.string("description", 300).notNullable();
-    table.string("imgUrl", 300).notNullable();
+    table.string("description", 800).notNullable();
+    table.string("imgUrl", 500).notNullable();
     addDefaultColumns(table);
   });
   await Knex.schema.createTable(tableNames.local, (table) => {
     table.increments().notNullable();
     table.string("name", 100).notNullable();
-    table.string("description", 300).notNullable();
-    table.string("imgUrl", 300).notNullable();
+    table.string("description", 800).notNullable();
+    table.string("imgUrl", 500).notNullable();
     addDefaultColumns(table);
   });
   await Knex.schema.createTable(tableNames.event, (table) => {
     table.increments().notNullable();
     table.string("name", 100).notNullable();
-    table.string("description", 300).notNullable();
+    table.string("description", 800).notNullable();
     table.timestamp("start_time", { precision: 6 }).notNullable();
     table.timestamp("end_time", { precision: 6 }).notNullable();
     table.string("type", 300).notNullable();
-    table.string("imgUrl", 300).notNullable();
+    table.string("imgUrl", 800).notNullable();
     addDefaultColumns(table);
   });
   await Knex.schema.createTable(tableNames.guest, (table) => {
@@ -95,10 +95,10 @@ exports.up = async (Knex) => {
   await Knex.schema.createTable(tableNames.dish, (table) => {
     table.increments().notNullable();
     table.string("name", 250);
-    table.string("description", 250);
-    table.string("small_description", 250);
+    table.string("description", 950);
+    table.string("small_description", 950);
     table.string("state", 250);
-    table.string("photoUrl", 250);
+    table.string("photoUrl", 750);
     table.decimal("price", { precision: 6 }).notNullable();
     table.boolean("active");
     addDefaultColumns(table);
