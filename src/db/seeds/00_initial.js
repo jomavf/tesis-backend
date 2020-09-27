@@ -289,7 +289,15 @@ exports.seed = async (knex) => {
   ]);
 
   await knex(tableNames.account).del();
-  await knex.table(tableNames.account).insert([]);
+  await knex.table(tableNames.account).insert([
+    {
+      currency_symbol: "$",
+      total_amount: 0,
+      billing_date_start: "2020-09-14T01:23:45.431Z",
+      billing_date_end: "2020-09-22T01:23:45.431Z",
+      guest_id: 1,
+    },
+  ]);
 
   await knex(tableNames.deviceAlexa).del();
   await knex
